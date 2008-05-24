@@ -18,7 +18,7 @@ ul {padding:0;margin:0 0 0 17px;list-style: square url("/images/bullet.gif");}
 #nav a:hover {text-decoration : underline;color : #f6dde3;}
 #main-content {margin : 0 auto;}
 #logo {margin-bottom : 45px;}
-.logotxt1 {font : normal 18px Georgia, serif;color : #fa7393;margin : 10px 0 0 15px;}
+.logotxt1 {font : normal 14px Georgia, serif;color : #fa7393;margin : 10px 0 0 15px;}
 .logotxt2 {font : normal 18px Georgia, serif;color : #7a2e40; }
 #left-column {width : 440px;padding : 0 30px 30px;float : left;}
 #right-column {width : 270px;float : right;}
