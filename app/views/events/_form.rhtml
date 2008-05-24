@@ -1,0 +1,22 @@
+<%= error_messages_for 'event' %>
+
+<!--[form:event]-->
+<p><label for="event_title">Title</label><br/>
+<%= text_field 'event', 'title'  %></p>
+
+<p><label for="event_agenda">Agenda</label><br/>
+<%= text_area 'event', 'agenda'  %></p>
+
+<p><label for="event_description">Description</label><br/>
+<%= text_area 'event', 'description'  %></p>
+
+<p><label for="event_date">Date</label><br/>
+<%= datetime_select 'event', 'date'  %></p>
+
+<p><label for="event_published">Published</label><br/>
+<%= text_field 'event', 'published'  %></p>
+
+<p><label for="event_created_at">Created at</label><br/>
+<%= datetime_select 'event', 'created_at'  %></p>
+<!--[eoform:event]-->
+

@@ -1,0 +1,22 @@
+<%= error_messages_for 'article' %>
+
+<!--[form:article]-->
+<p><label for="article_title">Title</label><br/>
+<%= text_field 'article', 'title'  %></p>
+
+<p><label for="article_tags">Tags</label><br/>
+<%= text_field 'article', 'tags'  %></p>
+
+<p><label for="article_body">Body</label><br/>
+<%= text_area 'article', 'body'  %></p>
+
+<p><label for="article_created_at">Created at</label><br/>
+<%= datetime_select 'article', 'created_at'  %></p>
+
+<p><label for="article_updated_at">Updated at</label><br/>
+<%= datetime_select 'article', 'updated_at'  %></p>
+
+<p><label for="article_published">Published</label><br/>
+<select id="article_published" name="article[published]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+<!--[eoform:article]-->
+

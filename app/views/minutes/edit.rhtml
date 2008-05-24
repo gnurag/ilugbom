@@ -1,0 +1,9 @@
+<h1>Editing minute</h1>
+
+<% form_tag :action => 'update', :id => @minute do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @minute %> |
+<%= link_to 'Back', :action => 'list' %>

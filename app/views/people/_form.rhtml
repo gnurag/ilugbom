@@ -1,0 +1,34 @@
+<%= error_messages_for 'person' %>
+
+<!--[form:person]-->
+<p><label for="person_username">Username</label><br/>
+<%= text_field 'person', 'username'  %></p>
+
+<p><label for="person_password">Password</label><br/>
+<%= password_field 'person', 'password'  %></p>
+
+<p><label for="person_fullname">Fullname</label><br/>
+<%= text_field 'person', 'fullname'  %></p>
+
+<p><label for="person_nickname">Nickname</label><br/>
+<%= text_field 'person', 'nickname'  %></p>
+
+<p><label for="person_irc_nick">Irc nick</label><br/>
+<%= text_field 'person', 'irc_nick'  %></p>
+
+<p><label for="person_email">Email</label><br/>
+<%= text_field 'person', 'email'  %></p>
+
+<p><label for="person_webpage">Webpage</label><br/>
+<%= text_field 'person', 'webpage'  %></p>
+
+<p><label for="person_visible">Visible</label><br/>
+<%= text_field 'person', 'visible'  %></p>
+
+<p><label for="person_deleted">Deleted</label><br/>
+<%= text_field 'person', 'deleted'  %></p>
+
+<p><label for="person_created_at">Created at</label><br/>
+<%= datetime_select 'person', 'created_at'  %></p>
+<!--[eoform:person]-->
+
