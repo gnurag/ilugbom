@@ -1,3 +1,4 @@
+<%content_for("left") do-%>
 <% for column in Page.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @page.send(column.name) %>
@@ -6,3 +7,6 @@
 
 <%= link_to 'Edit', :action => 'edit', :id => @page %> |
 <%= link_to 'Back', :action => 'list' %>
+<%end-%>
+<%content_for("right") do-%>
+<%end-%>

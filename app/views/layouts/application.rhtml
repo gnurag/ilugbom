@@ -6,10 +6,14 @@
   </div
   <div id="main-content">
     <div id="left-column">
+    <div id="logo"><img src="/images/iluglogo.png" alt=""
+      width="119" height="76" align="left" /><span
+      class="logotxt1"></span><span class="logotxt2">ILUG-BOM</span><br />
+      <span class="logotxt1" style="margin-left:15px;">Indian GNU/Linux Users Group of Mumbai</span></div>
       <%= @content_for_left-%>
     </div>
-    <div id="right-column"
-      <%= @content_for_right-%>
-    </div>
+      <div id="right-column">
+	<%= @content_for_right-%>
+      </div>
   </div>
 <%= render :partial => "layouts/footer" -%>

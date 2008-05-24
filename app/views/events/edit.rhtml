@@ -1,3 +1,4 @@
+<%content_for("left") do-%>
 <h1>Editing event</h1>
 
 <% form_tag :action => 'update', :id => @event do %>
@@ -7,3 +8,6 @@
 
 <%= link_to 'Show', :action => 'show', :id => @event %> |
 <%= link_to 'Back', :action => 'list' %>
+<%end-%>
+<%content_for("right") do-%>
+<%end-%>

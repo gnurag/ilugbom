@@ -1,3 +1,4 @@
+<%content_for("left") do-%>
 <h1>Listing minutes</h1>
 
 <table>
@@ -25,3 +26,7 @@
 <br />
 
 <%= link_to 'New minute', :action => 'new' %>
+
+<%end-%>
+<%content_for("right") do-%>
+<%end-%>

@@ -1,3 +1,4 @@
+<%content_for("left") do-%>
 <h1>New page</h1>
 
 <% form_tag :action => 'create' do %>
@@ -6,3 +7,6 @@
 <% end %>
 
 <%= link_to 'Back', :action => 'list' %>
+<%end-%>
+<%content_for("right") do-%>
+<%end-%>

@@ -1,3 +1,4 @@
+<%content_for("left") do-%>
 <% for column in Venue.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @venue.send(column.name) %>
@@ -6,3 +7,6 @@
 
 <%= link_to 'Edit', :action => 'edit', :id => @venue %> |
 <%= link_to 'Back', :action => 'list' %>
+<%end-%>
+<%content_for("right") do-%>
+<%end-%>
