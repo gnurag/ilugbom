@@ -1,0 +1,15 @@
+<%= render :partial => "layouts/header" -%>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <%= render :partial => "layouts/navigation"-%>
+  </div
+  <div id="main-content">
+    <div id="left-column">
+      <%= @content_for_left-%>
+    </div>
+    <div id="right-column"
+      <%= @content_for_right-%>
+    </div>
+  </div>
+<%= render :partial => "layouts/footer" -%>
