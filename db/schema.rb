@@ -19,15 +19,19 @@ ActiveRecord::Schema.define() do
   add_index "articles", ["title"], :name => "title"
 
   create_table "events", :force => true do |t|
-    t.column "title",       :string,   :limit => 150, :default => "", :null => false
-    t.column "agenda",      :text,                    :default => "", :null => false
-    t.column "description", :text,                    :default => "", :null => false
-    t.column "minute_id",   :integer
-    t.column "venue_id",    :integer
-    t.column "date",        :datetime
-    t.column "speaker_id",  :integer
-    t.column "published",   :integer,  :limit => 4,   :default => 0,  :null => false
-    t.column "created_at",  :datetime,                                :null => false
+    t.column "title",        :string,   :limit => 150, :default => "", :null => false
+    t.column "agenda",       :text,                    :default => "", :null => false
+    t.column "description",  :text,                    :default => "", :null => false
+    t.column "minute_id",    :integer
+    t.column "venue_id",     :integer
+    t.column "date",         :datetime
+    t.column "speaker_id",   :integer
+    t.column "event_url",    :string,   :limit => 200
+    t.column "upcoming_url", :string,   :limit => 200
+    t.column "flickr_url",   :string,   :limit => 200
+    t.column "is_upcoming",  :integer,  :limit => 4
+    t.column "published",    :integer,  :limit => 4,   :default => 0,  :null => false
+    t.column "created_at",   :datetime,                                :null => false
   end
 
   add_index "events", ["minute_id"], :name => "minute_id"
@@ -35,6 +39,7 @@ ActiveRecord::Schema.define() do
   add_index "events", ["speaker_id"], :name => "speaker_id"
   add_index "events", ["published"], :name => "published"
   add_index "events", ["title"], :name => "title"
+  add_index "events", ["is_upcoming"], :name => "upcoming"
 
   create_table "minutes", :force => true do |t|
     t.column "event_id",   :integer,                               :null => false
@@ -63,16 +68,19 @@ ActiveRecord::Schema.define() do
   add_index "pages", ["published"], :name => "published"
 
   create_table "people", :force => true do |t|
-    t.column "username",   :string,   :limit => 50,  :default => "", :null => false
-    t.column "password",   :string,   :limit => 45,  :default => "", :null => false
-    t.column "fullname",   :string,   :limit => 100, :default => "", :null => false
-    t.column "nickname",   :string,   :limit => 50
-    t.column "irc_nick",   :string,   :limit => 30
-    t.column "email",      :string,   :limit => 100, :default => "", :null => false
-    t.column "webpage",    :string,   :limit => 100
-    t.column "visible",    :integer,  :limit => 4,   :default => 0,  :null => false
-    t.column "deleted",    :integer,  :limit => 4,   :default => 0,  :null => false
-    t.column "created_at", :datetime,                                :null => false
+    t.column "username",         :string,   :limit => 50,  :default => "", :null => false
+    t.column "password",         :string,   :limit => 45,  :default => "", :null => false
+    t.column "fullname",         :string,   :limit => 100, :default => "", :null => false
+    t.column "nickname",         :string,   :limit => 50
+    t.column "irc_nick",         :string,   :limit => 30
+    t.column "email",            :string,   :limit => 100, :default => "", :null => false
+    t.column "webpage",          :string,   :limit => 100
+    t.column "flickr_username",  :string,   :limit => 32
+    t.column "yahooim_username", :string,   :limit => 32
+    t.column "gtalk_username",   :string,   :limit => 32
+    t.column "visible",          :integer,  :limit => 4,   :default => 0,  :null => false
+    t.column "deleted",          :integer,  :limit => 4,   :default => 0,  :null => false
+    t.column "created_at",       :datetime,                                :null => false
   end
 
   add_index "people", ["username"], :name => "username_2", :unique => true
