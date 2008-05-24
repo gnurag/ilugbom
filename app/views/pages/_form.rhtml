@@ -1,0 +1,19 @@
+<%= error_messages_for 'page' %>
+
+<!--[form:page]-->
+<p><label for="page_title">Title</label><br/>
+<%= text_field 'page', 'title'  %></p>
+
+<p><label for="page_body">Body</label><br/>
+<%= text_area 'page', 'body'  %></p>
+
+<p><label for="page_order">Order</label><br/>
+<%= text_field 'page', 'order'  %></p>
+
+<p><label for="page_published">Published</label><br/>
+<%= text_field 'page', 'published'  %></p>
+
+<p><label for="page_created_at">Created at</label><br/>
+<%= datetime_select 'page', 'created_at'  %></p>
+<!--[eoform:page]-->
+
