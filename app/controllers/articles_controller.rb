@@ -8,6 +8,10 @@ class ArticlesController < ApplicationController
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
 
+  def home
+    render :template => 'layouts/home'
+  end
+
   def list
     @article_pages, @articles = paginate :articles, :per_page => 10
   end
