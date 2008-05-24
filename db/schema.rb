@@ -17,7 +17,7 @@ ActiveRecord::Schema.define() do
   add_index "articles", ["author_id"], :name => "author_id"
   add_index "articles", ["published"], :name => "published"
   add_index "articles", ["title"], :name => "title"
-  add_index "articles", ["body"], :name => "body"
+#  add_index "articles", ["body"], :name => "body"
 
   create_table "events", :force => true do |t|
     t.column "title",       :string,    :limit => 150, :default => "", :null => false
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define() do
   add_index "events", ["venue_id"], :name => "venue_id"
   add_index "events", ["speaker_id"], :name => "speaker_id"
   add_index "events", ["published"], :name => "published"
-  add_index "events", ["description"], :name => "description"
-  add_index "events", ["agenda"], :name => "agenda"
+#  add_index "events", ["description"], :name => "description"
+#  add_index "events", ["agenda"], :name => "agenda"
   add_index "events", ["title"], :name => "title"
 
   create_table "minutes", :force => true do |t|
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define() do
   add_index "minutes", ["event_id"], :name => "event_id"
   add_index "minutes", ["author_id"], :name => "author_id"
   add_index "minutes", ["published"], :name => "published"
-  add_index "minutes", ["body"], :name => "body"
+#  add_index "minutes", ["body"], :name => "body"
 
   create_table "pages", :force => true do |t|
     t.column "title",      :string,    :limit => 30, :default => "", :null => false
