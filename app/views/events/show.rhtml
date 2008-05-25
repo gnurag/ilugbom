@@ -1,12 +1,36 @@
 <%content_for("left") do-%>
-<% for column in Event.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @event.send(column.name) %>
-</p>
-<% end %>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => @event.class.to_s.pluralize, :property => @event.title} -%>
+<div class="box">
+  <h1><%= link_to @event.title-%></h1>
+  <h4>Agenda</h4>
+  <%= @event.agenda -%>
+  <h4>Description</h4>
+  <%= @event.description -%>
+</div>
 
 <%= link_to 'Edit', :action => 'edit', :id => @event %> |
 <%= link_to 'Back', :action => 'list' %>
 <%end-%>
-<%content_for("left") do-%>
+<%content_for("right") do-%>
+<%if @recent_events-%>
+<h3>Recent events</h3>
+<ul>
+  <%for event in @recent_events -%>
+  <li><%= link_to truncate(event.title,30), :id => event.id-%></li>
+  <%end-%>
+</ul>
+<center><%= link_to "Show all", :action => 'list'-%></center>
+<%end-%>
+
+<h3>Properties</h3>
+<ul>
+  <li><strong>Title</strong>: <%= @event.title-%></li>
+  <%if @event.date and @event.date != ""%><li><strong>Event date</strong>: <%= @event.date.strftime("%d %b, %Y")-%></li><%end-%>
+  <%if @event.event_url and @event.event_url != ""%><li><a href="<%=@event.event_url-%>">Event website</a></li><%end-%>
+  <%if @event.upcoming_url and @event.upcoming_url != ""%><li><a href="<%= @event.upcoming_url-%>">Y! Upcoming url</a></li><%end-%>
+  <%if @event.flickr_url and @event.flickr_url != ""%><li><a href="<%= @event.flickr_url-%>">Flickr page</a></li><%end-%>
+  <li><strong>Created on</strong>: <%= @event.created_at.strftime("%d %m, %Y")-%></li>
+</ul>
+</div>
+
 <%end-%>
