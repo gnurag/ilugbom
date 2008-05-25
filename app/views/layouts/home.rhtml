@@ -2,7 +2,9 @@
 <%=render :partial => "events/upcoming"-%>
 <%for article in @articles-%>
   <h2><%= link_to article.title, :controller => 'articles', :action => 'show', :id => article.id -%></h2>
-  <p><%= article.body -%></p>
+  <p><%= truncate(article.body, 600) -%></p>
+  <%= link_to("Continue reading", :controller => 'articles', :action => 'show', :id => article.id) if article.body.length >= 600 -%><br/>
+  <div class="footnote">Posted by <%= link_to article.author.fullname, :controller => 'people', :action => 'show', :id => article.author.id-%> on <%= article.created_at.strftime("%d %b, %Y")-%></div>
 <%end-%>
 <br/><br/><%= link_to "Older articles", :controller => "articles", :action => "list"-%>
 <%end-%>
