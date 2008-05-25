@@ -1,22 +1,30 @@
 <%= error_messages_for 'event' %>
-
-<!--[form:event]-->
 <p><label for="event_title">Title</label><br/>
-<%= text_field 'event', 'title'  %></p>
+<%= text_field 'event', 'title', :size => 30  %></p>
 
 <p><label for="event_agenda">Agenda</label><br/>
-<%= text_area 'event', 'agenda'  %></p>
+<%= text_area 'event', 'agenda', :cols => 40, :rows => 5 %></p>
 
 <p><label for="event_description">Description</label><br/>
-<%= text_area 'event', 'description'  %></p>
+<%= text_area 'event', 'description', :cols => 40, :rows => 10 %></p>
 
-<p><label for="event_date">Date</label><br/>
-<%= datetime_select 'event', 'date'  %></p>
+<p><label for="event_date">Event date</label><br/>
+<%= date_select 'event', 'date'  %></p>
+
+<p><label for="event_event_url">Event URL</label><br/>
+<%= text_field 'event', 'event_url', :size => 30  %></p>
+
+<p><label for="event_upcoming_url">Y! Upcoming URL</label><br/>
+<%= text_field 'event', 'upcoming_url', :size => 30  %></p>
+
+<p><label for="event_flickr_url">Flickr URL</label><br/>
+<%= text_field 'event', 'flickr_url', :size => 30  %></p>
 
 <p><label for="event_published">Published</label><br/>
-<%= text_field 'event', 'published'  %></p>
+<select id="event_published" name="event[published]">
+  <option value="false" selected>False</option>
+  <option value="true">True</option>
+</select>
 
 <p><label for="event_created_at">Created at</label><br/>
-<%= datetime_select 'event', 'created_at'  %></p>
-<!--[eoform:event]-->
-
+<%= date_select 'event', 'created_at'  %></p>

@@ -11,6 +11,7 @@
 <%= link_to 'Edit', :action => 'edit', :id => @event %> |
 <%= link_to 'Back', :action => 'list' %>
 <%end-%>
+
 <%content_for("right") do-%>
 <%if @recent_events-%>
 <h3>Recent events</h3>
@@ -31,6 +32,4 @@
   <%if @event.flickr_url and @event.flickr_url != ""%><li><a href="<%= @event.flickr_url-%>">Flickr page</a></li><%end-%>
   <li><strong>Created on</strong>: <%= @event.created_at.strftime("%d %m, %Y")-%></li>
 </ul>
-</div>
-
 <%end-%>
