@@ -13,7 +13,7 @@
     <td><%= article.id-%>.</td>
     <td><%= link_to article.title, :action => 'show', :id => article%></td>
     <td><%= link_to article.author.fullname, :controller => 'people', :action => 'show', :id => article.author.id-%></td>
-    <td><%= article.created_at.strftime("%D")%></td>
+    <td><%= article.created_at.strftime("%d %b, %Y")%></td>
     <td><%= article.published == true ? 'Yes' : 'No'%></td>
 
     <td><%= link_to 'Edit', :action => 'edit', :id => article %></td>

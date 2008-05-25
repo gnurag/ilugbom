@@ -1,12 +1,12 @@
 <%= error_messages_for 'article' %>
 <p><label for="article_title">Title</label><br/>
-<%= text_field 'article', 'title'  %></p>
+<%= text_field 'article', 'title', :size => 30  %></p>
 
 <p><label for="article_tags">Tags</label><br/>
-<%= text_field 'article', 'tags'  %></p>
+<%= text_field 'article', 'tags', :size => 30  %></p>
 
 <p><label for="article_body">Body</label><br/>
-<%= text_area 'article', 'body'  %></p>
+<%= text_area 'article', 'body', :cols => 40, :rows => 10  %></p>
 
 <p><label for="article_created_at">Created at</label><br/>
 <%= date_select 'article', 'created_at'  %></p>

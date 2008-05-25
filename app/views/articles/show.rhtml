@@ -8,6 +8,7 @@
 <%= link_to 'Edit', :action => 'edit', :id => @article %> |
 <%= link_to 'Articles list', :action => 'list' %>
 <%end-%>
+
 <%content_for("right") do-%>
 <div class="sidebar">
 <%if @recent_articles-%>
@@ -24,7 +25,7 @@
 <ul>
   <li><strong>Title</strong>: <%= @article.title-%></li>
   <li><strong>Posted by</strong>: <%= @article.author.fullname-%></li>
-  <li><strong>Created on</strong>: <%= @article.created_at.strftime("%D")-%></li>
+  <li><strong>Created on</strong>: <%= @article.created_at.strftime("%d %b, %Y")-%></li>
   <li><strong>Published</strong>: <%= @article.published == true ? "Yes" : "No"-%></li>
   <li><strong>Tags</strong>: <%= @article.tags-%></li>
 </ul>
