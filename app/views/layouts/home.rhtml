@@ -1,58 +1,13 @@
 <%content_for("left") do-%>
 <%=render :partial => "events/upcoming"-%>
-<h2>Some text heading in H2 Tag</h2>
-			        <p><img src="/images/dog.jpg" alt="Dog
-  Template" width="92" height="129" align="left"
-  style="margin-right:10px;margin-bottom:10px;" /> Lorem ipsum dolor
-  sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-  invidunt ut labore et dolore magna aliquyam erat, sed diam
-  voluptua. At vero eos et accusam et justo duo dolores et ea
-  rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-  ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur
-  sadipscing elitr, sed diam nonumy eirmod tempor .</p>
-			        <p><br />
-			          invidunt ut labore et dolore magna
-  aliquyam erat, sed diam voluptua.At vero eos et accusam et justo duo
-  dolores et ea rebum nonumy eirmod tempor . invidunt ut labore et
-  dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-  accusam et justo duo dolores et ea rebum. </p>
-			  
-
+<%for article in @articles-%>
+  <h2><%= link_to article.title, :controller => 'articles', :action => 'show', :id => article.id -%></h2>
+  <p><%= article.body -%></p>
+<%end-%>
+<br/><br/><%= link_to "Older articles", :controller => "articles", :action => "list"-%>
 <%end-%>
 <%content_for("right") do-%>
-
-      <div id="main-image"><img src="images/lady.jpg" alt="I love
-      Pets" width="240" height="180" /></div>
-            <div class="sidebar">
-	              <h3>About this Site</h3>
-	              <p>Lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. In egestas nisl sit amet odio. Duis iaculis
-      metus eu nulla. Donec venenatis sapien sed urna. Donec et felis
-      ut elit elementum pellentesque. Praesent bibendum turpis semper
-      lacus.</p>
-	              <h3>Related Links</h3>
-	              <div class="box">
-			          <ul>
-				                <li><a
-      href="http://www.medicine-pet.com/" target="_blank">Pet
-      Medicine</a></li>
-                  <li><a href="http://pets.yahoo.com/pets/"
-      target="_blank">Yahoo Pets &amp; Animals</a></li>
-                  <li><a
-      href="http://www.web-designers-directory.org/"
-      target="_blank">Web site Designers</a></li>
-                  <li><a href="http://www.zebonline.com/"
-      target="_blank">Professional Web Design </a> </li>
-                  <li><a href="http://www.njoyment.com/"
-      target="_blank">Free Flash Games </a></li>
-                  <li><a href="http://www.oswd.org/"
-      target="_blank">Open Source Web Design</a> </li>
-                </ul>
-		        </div><a
-      href="http://www.web-designers-directory.org/"></a><a
-      href="http://www.medicine-pet.com/"></a>
-			      </div>
-			      
-
-			  
+<%= render :partial => "layouts/categories_nav" -%>
+<%= render :partial => "layouts/album" -%>
+<%= render :partial => "layouts/about" -%>
 <%end-%>

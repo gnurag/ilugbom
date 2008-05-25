@@ -6,9 +6,9 @@
   </div
   <div id="main-content">
     <div id="left-column">
-    <div id="logo"><img src="/images/iluglogo.png" alt=""
-      width="119" height="76" align="left" /><span
-      class="logotxt1"></span><span class="logotxt2">ILUG-BOM</span><br />
+    <div id="logo">
+      <img src="/images/iluglogo.png" alt="Website logo" width="119" height="76" align="left" />
+      <span class="logotxt1"></span><span class="logotxt2"><%= link_to "ILUG-BOM", :controller => 'articles', :action => 'home' -%></span><br />
       <span class="logotxt1" style="margin-left:15px;">Indian GNU/Linux Users Group of Mumbai</span></div>
       <%= @content_for_left-%>
     </div>
