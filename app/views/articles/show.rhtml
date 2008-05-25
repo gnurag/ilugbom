@@ -1,12 +1,32 @@
 <%content_for("left") do-%>
-<% for column in Article.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @article.send(column.name) %>
-</p>
-<% end %>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => @article.class.to_s.pluralize, :property => @article.title} -%>
+<div class="box">
+<h1><%= link_to @article.title-%></h1>
+<%= @article.body -%>
+</div>
 
 <%= link_to 'Edit', :action => 'edit', :id => @article %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Articles list', :action => 'list' %>
 <%end-%>
 <%content_for("right") do-%>
+<div class="sidebar">
+<%if @recent_articles-%>
+  <h3>Recent articles</h3>
+  <ul>
+    <%for article in @recent_articles -%>
+    <li><%= link_to truncate(article.title,30), :id => article.id-%></li>
+    <%end-%>
+  </ul>
+<center><%= link_to "Show all", :action => 'list'-%></center>
+<%end-%>
+
+<h3>Properties</h3>
+<ul>
+  <li><strong>Title</strong>: <%= @article.title-%></li>
+  <li><strong>Posted by</strong>: <%= @article.author.fullname-%></li>
+  <li><strong>Created on</strong>: <%= @article.created_at.strftime("%D")-%></li>
+  <li><strong>Published</strong>: <%= @article.published == true ? "Yes" : "No"-%></li>
+  <li><strong>Tags</strong>: <%= @article.tags-%></li>
+</ul>
+</div>
 <%end-%>
