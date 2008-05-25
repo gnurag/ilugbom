@@ -9,15 +9,18 @@ class ArticlesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def home
+    @articles = Article.find(:all, :include => [:author], :order => "articles.created_at, articles.id DESC", :limit => "3")
     render :template => 'layouts/home'
   end
 
   def list
-    @article_pages, @articles = paginate :articles, :per_page => 10
+    @article_pages, @articles = paginate :articles, :include => [:author], :order => "articles.created_at, articles.id DESC", :per_page => 10
   end
 
   def show
     @article = Article.find(params[:id])
+    recent_conditions = "1"
+    @recent_articles = Article.find(:all, :conditions => recent_conditions, :order => "created_at,id DESC", :limit => "10")
   end
 
   def new
@@ -26,6 +29,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(params[:article])
+    @article.author_id = 1
+    @article.urlpath = @article.title.downcase.gsub(" ", "-")
     if @article.save
       flash[:notice] = 'Article was successfully created.'
       redirect_to :action => 'list'
