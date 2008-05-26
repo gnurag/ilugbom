@@ -1,19 +1,22 @@
 <%= error_messages_for 'page' %>
-
-<!--[form:page]-->
 <p><label for="page_title">Title</label><br/>
 <%= text_field 'page', 'title'  %></p>
 
 <p><label for="page_body">Body</label><br/>
-<%= text_area 'page', 'body'  %></p>
+<%= text_area 'page', 'body', :cols => 40, :rows => 10  %></p>
 
-<p><label for="page_order">Order</label><br/>
-<%= text_field 'page', 'order'  %></p>
+<p><label for="page_order">Menu order</label><br/>
+<%= text_field 'page', 'order', :size => 4  %></p>
+
+<p><label for="page_title">Target URL</label><br/>
+<%= text_field 'page', 'target_url'  %></p>
 
 <p><label for="page_published">Published</label><br/>
-<%= text_field 'page', 'published'  %></p>
+<select id="page_published" name="page[published]">
+  <option value="false" selected>False</option>
+  <option value="true">True</option>
+</select>
+</p>
 
 <p><label for="page_created_at">Created at</label><br/>
-<%= datetime_select 'page', 'created_at'  %></p>
-<!--[eoform:page]-->
-
+<%= date_select 'page', 'created_at'  %></p>

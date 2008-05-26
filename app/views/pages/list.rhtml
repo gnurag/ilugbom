@@ -1,23 +1,28 @@
 <%content_for("left") do-%>
-<h1>Listing pages</h1>
-
+<%= render :partial => "layouts/nav_bar", :locals => {:category => "Pages", :property => nil} -%>
 <table>
   <tr>
-  <% for column in Page.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Created on</th>
+    <th>Published</th>
+    <th>Display order</th>
   </tr>
-  
-<% for page in @pages %>
+  <% for page in @pages %>
   <tr>
-  <% for column in Page.content_columns %>
-    <td><%=h page.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => page %></td>
+    <td><%= page.id-%>.</td>
+    <td><%= link_to page.title, :action => 'show', :id => page%></td>
+    <td><%= link_to page.author.fullname, :controller => 'people', :action => 'show', :id => page.author.id-%></td>
+    <td><%= page.created_at.strftime("%d %b, %Y")%></td>
+    <td><%= page.published == true ? 'Yes' : 'No'%></td>
+    <td><%= page.order%></td>
+
     <td><%= link_to 'Edit', :action => 'edit', :id => page %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => page }, :confirm => 'Are you sure?', :method => :post %></td>
   </tr>
-<% end %>
+  <tr><td colspan="6"><div class="box"><%= truncate(page.body,100)-%></div></td></tr>
+  <% end %>
 </table>
 
 <%= link_to 'Previous page', { :page => @page_pages.current.previous } if @page_pages.current.previous %>
@@ -28,4 +33,5 @@
 <%= link_to 'New page', :action => 'new' %>
 <%end-%>
 <%content_for("right") do-%>
+<%= render :partial => "layouts/categories_nav" -%>
 <%end-%>
