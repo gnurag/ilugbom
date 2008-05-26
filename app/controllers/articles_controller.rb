@@ -15,12 +15,14 @@ class ArticlesController < ApplicationController
 
   def list
     @article_pages, @articles = paginate :articles, :include => [:author], :order => "articles.created_at, articles.id DESC", :per_page => 10
+    @page_title = "Articles"
   end
 
   def show
     @article = Article.find(params[:id])
     recent_conditions = "1"
-    @recent_articles = Article.find(:all, :conditions => recent_conditions, :order => "created_at,id DESC", :limit => "10")
+    @recent_articles = Article.find(:all, :conditions => recent_conditions, :order => "articles.created_at, articles.id DESC", :limit => "10")
+    @page_title = @article.title if @article
   end
 
   def new
@@ -46,6 +48,8 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update_attributes(params[:article])
+      @article.urlpath = @article.title.downcase.gsub(" ", "-")
+      @article.save
       flash[:notice] = 'Article was successfully updated.'
       redirect_to :action => 'show', :id => @article
     else

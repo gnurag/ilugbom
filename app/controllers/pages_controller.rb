@@ -9,11 +9,15 @@ class PagesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @page_pages, @pages = paginate :pages, :per_page => 10
+    @page_pages, @pages = paginate :pages, :include => [:author], :order => "pages.created_at, pages.id DESC", :per_page => 10
+    @page_title = "Pages"
   end
 
   def show
     @page = Page.find(params[:id])
+    recent_conditions = "1"
+    @recent_pages = Page.find(:all, :conditions => recent_conditions, :order => "pages.created_at, pages.id DESC", :limit => "10")
+    @page_title = @page.title if @page
   end
 
   def new
@@ -22,6 +26,8 @@ class PagesController < ApplicationController
 
   def create
     @page = Page.new(params[:page])
+    @page.author_id = 1
+    @page.urlpath = @page.title.downcase.gsub(" ","-")
     if @page.save
       flash[:notice] = 'Page was successfully created.'
       redirect_to :action => 'list'
@@ -37,6 +43,8 @@ class PagesController < ApplicationController
   def update
     @page = Page.find(params[:id])
     if @page.update_attributes(params[:page])
+      @page.urlpath = @page.title.downcase.gsub(" ","-")
+      @page.save
       flash[:notice] = 'Page was successfully updated.'
       redirect_to :action => 'show', :id => @page
     else
