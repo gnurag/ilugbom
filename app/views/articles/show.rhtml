@@ -1,8 +1,8 @@
 <%content_for("left") do-%>
 <%= render :partial => "layouts/nav_bar", :locals => {:category => @article.class.to_s.pluralize, :property => @article.title} -%>
 <div class="box">
-<h1><%= link_to @article.title-%></h1>
-<%= @article.body -%>
+  <h1><%= link_to @article.title-%></h1>
+  <%= @article.body -%>
 </div>
 
 <%= link_to 'Edit', :action => 'edit', :id => @article %> |
