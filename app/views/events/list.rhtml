@@ -12,12 +12,12 @@
     <td><%= event.id -%>.</td>
     <td><%= link_to event.title, :action => 'show', :id => event-%></td>
     <td><%= event.created_at.strftime("%d %b, %Y") -%></td>
-    <td><%= event.published == true ? "Yes" : "No" -%><td>
+    <td><%= event.published == true ? "Yes" : "No" -%></td>
 
     <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td>
   </tr>
-  <tr><td colspan="4"><div class="box"><%=truncate(event.agenda,100)-%></div></td><tr>
+  <tr><td colspan="4"><div class="box"><%= truncate(event.agenda,100) -%></div></td></tr>
 <% end %>
 </table>
 
