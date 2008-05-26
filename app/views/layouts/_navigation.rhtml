@@ -1,6 +1,6 @@
-<div id="nav"><a href="index.html">Home</a> &nbsp;|&nbsp; <a
-  href="#">Pets Community</a> &nbsp;|&nbsp; <a href="#">About us</a>
-  &nbsp;|&nbsp; <a href="#">Pet Gallery</a> &nbsp;|&nbsp; <a
-  href="#">Latest News</a> &nbsp;|&nbsp; <a href="#">Contact us</a>
+<div id="nav"><%= link_to "home", :controller => "articles", :action => "home"-%>
+<% for page in Page.find(:all)-%>
+  &nbsp;|&nbsp;<%= (not page.target_url or page.target_url == "") ? link_to( page.title.downcase, :controller => "pages", :action => "show", :id => page.id) : link_to(page.title.downcase, page.target_url)-%>
+<%end-%>
 </div>
 <div id="bg"></div>
