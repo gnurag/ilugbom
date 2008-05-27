@@ -58,3 +58,6 @@ end
 # Mime::Type.register "application/x-mobile", :mobile
 
 # Include your application configuration below
+
+require 'AuthSystem'
+RANDOM_KEY = PRNG.get_random_key
