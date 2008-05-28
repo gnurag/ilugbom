@@ -1,3 +1,6 @@
+<%content_for("left") do-%>
+<%=RANDOM_KEY-%>
+
 <% for column in Person.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @person.send(column.name) %>
@@ -6,3 +9,6 @@
 
 <%= link_to 'Edit', :action => 'edit', :id => @person %> |
 <%= link_to 'Back', :action => 'list' %>
+<%end-%>
+<%content_for("right") do-%>
+<%end-%>

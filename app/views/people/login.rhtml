@@ -1,0 +1,26 @@
+<%content_for("left") do-%>
+<div class="box">
+  <h1>Login:</h1>
+  <% form_tag :action => 'login'do -%>
+  <p><label for="person_username">Username</label><br/>
+  <%= text_field 'person', 'username', :size => 30  %></p>
+  
+  <p><label for="person_password">Password</label><br/>
+  <%= password_field 'person', 'password', :size => 30  %></p>
+
+  <%= submit_tag 'Login' %>
+  <% end -%>
+  <ul>
+    <li><strong>Register</strong></li>
+    <li><strong>Forgot password?</strong></li>
+    <li><strong>Privacy policy</strong></li>
+  </ul>
+
+</div>
+<%end-%>
+
+<%content_for("right") do-%>
+<div class="sidebar">
+
+</div>      
+<%end-%>
