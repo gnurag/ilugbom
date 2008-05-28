@@ -1,4 +1,9 @@
 class PeopleController < ApplicationController
+  before_filter :login_required, :except => [:index, :list, :show, :login, :logout, :register, :reminder]
+
+  require 'openssl'
+  include AuthSystem
+
   def index
     list
     render :action => 'list'
@@ -8,11 +13,33 @@ class PeopleController < ApplicationController
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
 
+  def login
+    if not @current_user and params[:person] and params[:person][:username] and params[:person][:password]
+      if Person.authenticate(params[:person][:username], params[:person][:password])
+        redirect_to :controller => 'articles', :action => 'home'
+      else
+        @login_failed = true
+        render :template => 'people/login'
+      end
+    end
+  end
+
+  def logout
+  end
+
+  def register
+  end
+
+  def reminder
+  end
+
   def list
+    cookies[:foo] = "bar-value"
     @person_pages, @people = paginate :people, :per_page => 10
   end
 
   def show
+    
     @person = Person.find(params[:id])
   end
 

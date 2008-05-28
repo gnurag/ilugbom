@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_filter :login_required, :except => [:index, :home, :list, :show]
+
   def index
     list
     render :action => 'list'
