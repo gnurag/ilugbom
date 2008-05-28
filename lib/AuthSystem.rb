@@ -12,7 +12,8 @@ COOKIE_NAME = "xinh-ilug"
 class PRNG
   protected
   def self.get_random_key()
-    random_data = OpenSSL::BN.rand(2048, -1, false).to_s
+    puts "Generating randomness"
+    random_data = OpenSSL::BN.rand(4096, -1, false).to_s
     return OpenSSL::Digest::SHA512.new(random_data).hexdigest
   end
 end
@@ -20,13 +21,6 @@ end
 
 module AuthSystem
   protected
-  def login_required
-    logged_in?
-  end
-  
-  def logged_in?
-    current_user != nil
-  end
 
   # Functions to base64 encode/decode cookie data
   def string_encode(data)
