@@ -61,3 +61,5 @@ end
 
 require 'AuthSystem'
 RANDOM_KEY = PRNG.get_random_key
+COOKIE_NAME = "xinh-ilug"
+COOKIE_DOMAIN = 'localhost'
