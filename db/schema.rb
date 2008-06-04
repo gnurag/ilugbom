@@ -57,14 +57,14 @@ ActiveRecord::Schema.define() do
     t.column "title",      :string,   :limit => 30, :default => "", :null => false
     t.column "body",       :text,                   :default => "", :null => false
     t.column "author_id",  :integer,                                :null => false
-    t.column "order",      :integer,  :limit => 4
+    t.column "order_by",      :integer,  :limit => 4
     t.column "published",  :integer,  :limit => 4,  :default => 0,  :null => false
     t.column "created_at", :datetime,                               :null => false
   end
 
   add_index "pages", ["title"], :name => "title"
   add_index "pages", ["author_id"], :name => "author_id"
-  add_index "pages", ["order"], :name => "order"
+  add_index "pages", ["order_by"], :name => "order_by"
   add_index "pages", ["published"], :name => "published"
 
   create_table "people", :force => true do |t|
