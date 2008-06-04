@@ -4,9 +4,37 @@
 class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   #session :session_key => '_ilugbom_session_id'  
+  include AuthSystem
+  require 'openssl'
   session :disabled => true
+  prepend_before_filter :get_user_from_cookie, :init_site
 
   def login_required
     redirect_to :controller => 'people', :action => 'login', :return => request.host_with_port+request.request_uri if not @current_user
   end
+
+  def get_user_from_cookie
+    user = get_user_from_login_cookie
+    if not user.nil?
+      ua = user.split("|")  # ua = user array
+      @current_user = {
+        :id => ua[0],
+        :username => ua[1],
+        :fullname => ua[2],
+        :nickname => ua[3],
+        :irc_nick => ua[4],
+        :email => ua[5],
+        :webpage => ua[6],
+        :flickr_username => ua[7],
+        :yahooim_username => ua[8],
+        :gtalk_username => ua[9],
+        :visible  => ua[10]
+      }
+    end
+  end
+
+  def init_site
+    @pages = Page.find(:all, :conditions => "published = 1", :order => "order_by ASC")
+  end
+
 end
