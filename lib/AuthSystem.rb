@@ -7,8 +7,6 @@ require 'openssl'
 require 'base64'
 require 'digest/sha1'
 
-COOKIE_NAME = "xinh-ilug"
-
 class PRNG
   protected
   def self.get_random_key()
@@ -36,6 +34,29 @@ module AuthSystem
   end
   def openssl_decrypt(data, key=RANDOM_KEY)
     return openssl_aes(:decrypt, data, key)
+  end
+
+  # Function to set login cookie if the user is authenticated.
+  def set_login_cookie(user_data)
+    user_data_encrypted = string_encode(openssl_encrypt(user_data))
+    user_data_checksum  = OpenSSL::Digest::SHA1.new(user_data).hexdigest
+    cookies[COOKIE_NAME] = user_data_encrypted + ":" + user_data_checksum
+  end
+  
+  def get_user_from_login_cookie
+    user_cookie = cookies[COOKIE_NAME]
+    if not user_cookie.nil?
+      begin
+        user_data_encrypted, user_data_checksum = user_cookie.split(":")
+        if not user_data_encrypted.nil? and not user_data_checksum.nil?
+          user_data = openssl_decrypt(string_decode(user_data_encrypted))
+          return user_data if (OpenSSL::Digest::SHA1.new(user_data).hexdigest == user_data_checksum)
+        end
+      rescue
+        cookies.delete COOKIE_NAME
+      end      
+    end
+    return nil
   end
 
   private
