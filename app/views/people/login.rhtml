@@ -1,9 +1,10 @@
 <%content_for("left") do-%>
 <div class="box">
   <h1>Login:</h1>
+  <%if @login_failed_user-%><h4>Invalid username or password.</h4><%end-%>
   <% form_tag :action => 'login'do -%>
   <p><label for="person_username">Username</label><br/>
-  <%= text_field 'person', 'username', :size => 30  %></p>
+  <%= text_field 'person', 'username', :size => 30, :value => @login_failed_user  %></p>
   
   <p><label for="person_password">Password</label><br/>
   <%= password_field 'person', 'password', :size => 30  %></p>
