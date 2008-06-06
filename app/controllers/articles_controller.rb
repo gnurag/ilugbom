@@ -11,26 +11,25 @@ class ArticlesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def home
-    @articles = Article.find(:all, :include => [:author], :order => "articles.created_at, articles.id DESC", :limit => "3")
+    @articles = Article.find(:all, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at, articles.id DESC", :limit => "3")
     render :template => 'layouts/home'
   end
 
   def list
-    @article_pages, @articles = paginate :articles, :include => [:author], :order => "articles.created_at, articles.id DESC", :per_page => 10
+    @article_pages, @articles = paginate :articles, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at, articles.id DESC", :per_page => 10
     @page_title = "Articles"
   end
 
   def show
-    @article = Article.find(params[:id])
-    recent_conditions = "1"
-    @recent_articles = Article.find(:all, :conditions => recent_conditions, :order => "articles.created_at, articles.id DESC", :limit => "10")
+    @article   = Article.find(params[:id], :conditions => published_sql(self.controller_name))
+    @recent_articles = Article.find(:all, :conditions => published_sql(self.controller_name), :order => "articles.created_at, articles.id DESC", :limit => "10")
     @page_title = @article.title if @article
   end
 
   def new
     @article = Article.new
   end
-
+  
   def create
     @article = Article.new(params[:article])
     @article.author_id = 1

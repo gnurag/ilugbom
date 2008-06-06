@@ -28,6 +28,8 @@ class PeopleController < ApplicationController
   end
 
   def logout
+    cookies.delete COOKIE_NAME if cookies[COOKIE_NAME]
+    redirect_to :controller => 'articles', :action => 'home'
   end
 
   def register

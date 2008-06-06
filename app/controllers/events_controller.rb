@@ -11,14 +11,13 @@ class EventsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @event_pages, @events = paginate :events, :include => [:minutes], :order => "events.created_at, events.id DESC", :per_page => 10
+    @event_pages, @events = paginate :events, :conditions => published_sql(self.controller_name), :include => [:minutes], :order => "events.created_at, events.id DESC", :per_page => 10
     @page_title = "Events"
   end
 
   def show
-    @event = Event.find(params[:id])
-    recent_conditions = "1"
-    @recent_events = Event.find(:all, :conditions => recent_conditions, :order => "events.created_at, events.id DESC", :limit => "10")
+    @event = Event.find(params[:id], :conditions => published_sql(self.controller_name))
+    @recent_events = Event.find(:all, :conditions => published_sql(self.controller_name), :order => "events.created_at, events.id DESC", :limit => "10")
     @page_title = @event.title if @event
   end
 
