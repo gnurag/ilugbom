@@ -34,7 +34,12 @@ class ApplicationController < ActionController::Base
   end
 
   def init_site
-    @pages = Page.find(:all, :conditions => "published = 1", :order => "order_by ASC")
+    @pages = Page.find(:all, :conditions => "pages.published = 1", :order => "pages.order_by,pages.id ASC")
   end
 
+  private
+  def published_sql(tablename="", fieldname = "published")
+    conditions = @current_user ? "1=1" : "#{tablename}.#{fieldname} = 1"
+  end
+  
 end
