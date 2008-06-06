@@ -14,8 +14,8 @@
     <td><%= event.created_at.strftime("%d %b, %Y") -%></td>
     <td><%= event.published == true ? "Yes" : "No" -%></td>
 
-    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td>
+    <%if @current_user-%><td><%= link_to 'Edit', :action => 'edit', :id => event %></td><%end-%>
+    <%if @current_user-%><td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td><%end-%>
   </tr>
   <tr><td colspan="4"><div class="box"><%= truncate(event.agenda,100) -%></div></td></tr>
 <% end %>
@@ -26,7 +26,7 @@
 
 <br />
 
-<%= link_to 'New event', :action => 'new' %>
+<%= link_to('New event', :action => 'new') if @current_user%>
 <%end-%>
 <%content_for("right") do-%>
 <%= render :partial => "layouts/categories_nav" -%>
