@@ -6,7 +6,7 @@
     <th>Title</th>
     <th>Author</th>
     <th>Created on</th>
-    <th>Published</th>
+    <th><%= "Published" if @current_user-%></th>
   </tr>
 <% for article in @articles %>
   <tr>
@@ -14,19 +14,19 @@
     <td><%= link_to article.title, :action => 'show', :id => article%></td>
     <td><%= link_to article.author.fullname, :controller => 'people', :action => 'show', :id => article.author.id-%></td>
     <td><%= article.created_at.strftime("%d %b, %Y")%></td>
-    <td><%= article.published == true ? 'Yes' : 'No'%></td>
+    <td><%= (article.published == true ? 'Yes' : 'No') if @current_user%></td>
 
     <td><%= link_to('Edit', {:action => 'edit', :id => article}) if @current_user %></td>
     <td><%= link_to('Delete', { :action => 'destroy', :id => article }, :confirm => 'Are you sure?', :method => :post) if @current_user%></td>
   </tr>
-  <tr><td colspan="5"><div class="box"><%= truncate(article.body,100)-%></div></td></tr>
+  <tr><td colspan="7"><div class="box"><%= truncate(article.body,100)-%></div></td></tr>
 <% end %>
 </table>
 
 <%= link_to 'Previous page', { :page => @article_pages.current.previous } if @article_pages.current.previous %>
 <%= link_to 'Next page', { :page => @article_pages.current.next } if @article_pages.current.next %> 
 <br />
-<%= link_to 'New article', :action => 'new' %>
+<%= link_to 'New article', :action => 'new' if @current_user%>
 <%end-%>
 <%content_for("right") do-%>
 <%= render :partial => "layouts/categories_nav" -%>
