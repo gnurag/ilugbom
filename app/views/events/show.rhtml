@@ -8,8 +8,8 @@
   <%= @event.description -%>
 </div>
 
-<%= link_to 'Edit', :action => 'edit', :id => @event %> |
-<%= link_to 'Back', :action => 'list' %>
+<%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @event %> | <%end-%>
+<%= link_to 'Events list', :action => 'list' %>
 <%end-%>
 
 <%content_for("right") do-%>

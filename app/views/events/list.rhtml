@@ -5,19 +5,19 @@
     <th>Id</th>
     <th>Title</th>
     <th>Date</th>
-    <th>Published</th>
+    <th><%= "Published" if @current_user-%></th>
   </tr>
 <% for event in @events %>
   <tr>
     <td><%= event.id -%>.</td>
     <td><%= link_to event.title, :action => 'show', :id => event-%></td>
     <td><%= event.created_at.strftime("%d %b, %Y") -%></td>
-    <td><%= event.published == true ? "Yes" : "No" -%></td>
+    <td><%= (event.published == true ? "Yes" : "No") if @current_user -%></td>
 
-    <%if @current_user-%><td><%= link_to 'Edit', :action => 'edit', :id => event %></td><%end-%>
-    <%if @current_user-%><td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td><%end-%>
+    <td><%= link_to 'Edit', :action => 'edit', :id => event if @current_user%></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post if @current_user%></td>
   </tr>
-  <tr><td colspan="4"><div class="box"><%= truncate(event.agenda,100) -%></div></td></tr>
+  <tr><td colspan="6"><div class="box"><%= truncate(event.agenda,100) -%></div></td></tr>
 <% end %>
 </table>
 

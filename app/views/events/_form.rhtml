@@ -22,8 +22,8 @@
 
 <p><label for="event_published">Published</label><br/>
 <select id="event_published" name="event[published]">
-  <option value="false" selected>False</option>
-  <option value="true">True</option>
+  <option value="false" <%= @event.published == false ? "selected" : ""-%>>False</option>
+  <option value="true"  <%= @event.published == true ? "selected" : ""-%>>True</option>
 </select>
 
 <p><label for="event_created_at">Created at</label><br/>
