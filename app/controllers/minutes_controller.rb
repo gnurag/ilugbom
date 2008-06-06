@@ -11,11 +11,14 @@ class MinutesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @minute_pages, @minutes = paginate :minutes, :per_page => 10
+    @minute_pages, @minutes = paginate :minutes, :conditions => published_sql(self.controller_name), :include => [:event], :order => "minutes.created_at, minutes.id DESC",  :per_page => 10
+    @page_title = "Minutes"
   end
 
   def show
-    @minute = Minute.find(params[:id])
+    @minute = Minute.find(params[:id], :conditions => published_sql(self.controller_name))
+    @recent_minutes = Minute.find(:all, :conditions => published_sql(self.controller_name), :order => "minutes.created_at, minutes.id DESC", :limit => "10")
+    @page_title = "Minutes for #{@minute.event.title}" if @minute
   end
 
   def new
@@ -23,7 +26,7 @@ class MinutesController < ApplicationController
   end
 
   def create
-    @minute = Minute.new(params[:minute])
+    @minute = Minute.new(params[:minute]) 
     if @minute.save
       flash[:notice] = 'Minute was successfully created.'
       redirect_to :action => 'list'

@@ -11,14 +11,13 @@ class PagesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @page_pages, @pages = paginate :pages, :include => [:author], :order => "pages.created_at, pages.id DESC", :per_page => 10
+    @page_pages, @pages = paginate :pages, :conditions => published_sql(self.controller_name), :include => [:author], :order => "pages.created_at, pages.id DESC", :per_page => 10
     @page_title = "Pages"
   end
 
   def show
-    @page = Page.find(params[:id])
-    recent_conditions = "1"
-    @recent_pages = Page.find(:all, :conditions => recent_conditions, :order => "pages.created_at, pages.id DESC", :limit => "10")
+    @page = Page.find(params[:id], :conditions => published_sql(self.controller_name))
+    @recent_pages = Page.find(:all, :conditions => published_sql(self.controller_name), :order => "pages.created_at, pages.id DESC", :limit => "10")
     @page_title = @page.title if @page
   end
 

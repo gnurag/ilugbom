@@ -39,12 +39,14 @@ class PeopleController < ApplicationController
   end
 
   def list
-    @person_pages, @people = paginate :people, :per_page => 10
+    @person_pages, @people = paginate :people, :conditions => published_sql(self.controller_name, "visible"), :order => "people.fullname, people.created_at, people.id DESC", :per_page => 10
+    @page_title = "People"
   end
 
   def show
-    
-    @person = Person.find(params[:id])
+    @person = Person.find(params[:id], :conditions => published_sql(self.controller_namem "visible"))
+    @recent_people = Person.find(:all, :conditions => published_sql(self.controller_name, "visible"), :order => "people.fullname, people.created_at, people.id DESC", :limit => "10")
+    @page_title = @person.fullname if @person
   end
 
   def new

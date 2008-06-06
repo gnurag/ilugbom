@@ -11,11 +11,14 @@ class VenuesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @venue_pages, @venues = paginate :venues, :per_page => 10
+    @venue_pages, @venues = paginate :venues, :conditions => published_sql(self.controller_name), :order => "venues.created_at, venues.id DESC",:per_page => 10
+    @page_title = "Venues"
   end
 
   def show
-    @venue = Venue.find(params[:id])
+    @venue = Venue.find(params[:id], :conditions => published_sql(self.controller_name))
+    @recent_venues = Venue.find(:all, :conditions => published_sql(self.controller_name), :order => "venues.created_at, venues.id DESC", :limit => "10")
+    @page_title = @venue.name if @venue
   end
 
   def new
@@ -24,6 +27,7 @@ class VenuesController < ApplicationController
 
   def create
     @venue = Venue.new(params[:venue])
+    @venue.urlpath = @venue.name.downcase.gsub(" ", "-")
     if @venue.save
       flash[:notice] = 'Venue was successfully created.'
       redirect_to :action => 'list'
@@ -39,6 +43,8 @@ class VenuesController < ApplicationController
   def update
     @venue = Venue.find(params[:id])
     if @venue.update_attributes(params[:venue])
+      @venue.urlpath = @venue.name.downcase.gsub(" ", "-")
+      @venue.save
       flash[:notice] = 'Venue was successfully updated.'
       redirect_to :action => 'show', :id => @venue
     else
