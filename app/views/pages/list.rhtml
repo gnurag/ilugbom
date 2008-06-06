@@ -16,7 +16,7 @@
     <td><%= link_to page.author.fullname, :controller => 'people', :action => 'show', :id => page.author.id-%></td>
     <td><%= page.created_at.strftime("%d %b, %Y")%></td>
     <td><%= page.published == true ? 'Yes' : 'No'%></td>
-    <td><%= page.order%></td>
+    <td><%= page.order_by%></td>
 
     <td><%= link_to 'Edit', :action => 'edit', :id => page %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => page }, :confirm => 'Are you sure?', :method => :post %></td>

@@ -27,7 +27,7 @@
     <li><strong>Posted by</strong>: <%= @page.author.fullname-%></li>
     <li><strong>Created on</strong>: <%= @page.created_at.strftime("%d %b, %Y")-%></li>
     <li><strong>Published</strong>: <%= @page.published == true ? "Yes" : "No"-%></li>
-    <li><strong>Menu order</strong>: <%= @page.order-%></li>
+    <li><strong>Menu order</strong>: <%= @page.order_by-%></li>
     <%if @page.target_url and @page.target_url != ""-%><li><a href="<%=@page.target_url-%>">Target URL</a></li><%end-%>
   </ul>
 </div>
