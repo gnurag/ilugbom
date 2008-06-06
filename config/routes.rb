@@ -17,6 +17,9 @@ ActionController::Routing::Routes.draw do |map|
   # instead of a file named 'wsdl'
   map.home '', :controller => 'articles', :action => 'home'
   map.connect ':controller/service.wsdl', :action => 'wsdl'
+  map.login 'login', :controller => 'people', :action => 'login'
+  map.logout 'logout', :controller => 'people', :action => 'logout'
+  map.logout 'register', :controller => 'people', :action => 'register'
 
   # Install the default route as the lowest priority.
 #  map.connect ':controller/:action/:id.:format'
