@@ -16,8 +16,8 @@
     <td><%= article.created_at.strftime("%d %b, %Y")%></td>
     <td><%= article.published == true ? 'Yes' : 'No'%></td>
 
-    <td><%= link_to 'Edit', :action => 'edit', :id => article %></td>
-    <td><%= link_to 'Delete', { :action => 'destroy', :id => article }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= link_to('Edit', {:action => 'edit', :id => article}) if @current_user %></td>
+    <td><%= link_to('Delete', { :action => 'destroy', :id => article }, :confirm => 'Are you sure?', :method => :post) if @current_user%></td>
   </tr>
   <tr><td colspan="5"><div class="box"><%= truncate(article.body,100)-%></div></td></tr>
 <% end %>
