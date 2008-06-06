@@ -5,7 +5,7 @@
   <%= @article.body -%>
 </div>
 
-<%= link_to 'Edit', :action => 'edit', :id => @article %> |
+<%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @article %> | <%end-%>
 <%= link_to 'Articles list', :action => 'list' %>
 <%end-%>
 
