@@ -1,6 +1,6 @@
 <div id="nav"><%= link_to "home", :controller => "articles", :action => "home"-%>
 <%for page in @pages -%>
   &nbsp;|&nbsp;<%= (not page.target_url or page.target_url == "") ? link_to( page.title.downcase, :controller => "pages", :action => "show", :id => page.id) : link_to(page.title.downcase, page.target_url)-%>
-<%end-%>&nbsp;|&nbsp;<strong>Logout</strong>
+<%end-%>&nbsp;|&nbsp;<%if @current_user-%><%=link_to("Logout "+@current_user[:username], {:controller => 'people', :action => 'logout'})-%><%else-%><%=link_to("Login", {:controller => 'people', :action => 'login'})-%><%end-%>
 </div>
 <div id="bg"></div>
