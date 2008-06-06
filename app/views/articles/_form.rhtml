@@ -16,7 +16,7 @@
 
 <p><label for="article_published">Published</label><br/>
 <select id="article_published" name="article[published]">
-  <option value="false" selected>False</option>
-  <option value="true">True</option>
+  <option value="false" <%= @article.published == false ? "selected" : ""-%>>False</option>
+  <option value="true"  <%= @article.published == true ? "selected" : ""-%>>True</option>
 </select>
 </p>
