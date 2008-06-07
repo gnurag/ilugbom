@@ -1,27 +1,33 @@
-<h1>Listing people</h1>
-
+<%content_for("left") do-%>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => "People", :property => nil} -%>
 <table>
   <tr>
-  <% for column in Person.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Id</th>
+    <th>Username</th>
+    <th>Name</th>
+    <th>Created on</th>
+    <th><%= "Visible" if @current_user-%></th>
   </tr>
   
 <% for person in @people %>
   <tr>
-  <% for column in Person.content_columns %>
-    <td><%=h person.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => person %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => person %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= person.id -%></td>
+    <td><%= link_to person.username, :action => 'show', :id => person-%></td>
+    <td><%= person.fullname-%></td>
+    <td><%= person.created_at.strftime("%d %b, %Y") -%></td>
+    <td><%= (person.visible == true ? 'Yes' : 'No') if @current_user-%></td>
+
+    <td><%= link_to('Edit', :action => 'edit', :id => person) if @current_user %></td>
+    <td><%= link_to('Destroy', { :action => 'destroy', :id => person }, :confirm => 'Are you sure?', :method => :post) if @current_user %></td>
   </tr>
 <% end %>
 </table>
 
 <%= link_to 'Previous page', { :page => @person_pages.current.previous } if @person_pages.current.previous %>
 <%= link_to 'Next page', { :page => @person_pages.current.next } if @person_pages.current.next %> 
-
 <br />
-
-<%= link_to 'New person', :action => 'new' %>
+<%= link_to 'New user', :action => 'new' if @current_user%>
+<%end-%>
+<%content_for("right") do -%>
+<%= render :partial => "layouts/categories_nav" -%>
+<%end-%>

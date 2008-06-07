@@ -1,31 +1,40 @@
 <%content_for("left") do-%>
-<h1>Listing venues</h1>
-
+<%= render :partial => "layouts/nav_bar", :locals => {:category => "Venues", :property => nil} -%>
 <table>
   <tr>
-  <% for column in Venue.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Locality</th>
+    <th>Created on</th>
+    <th><%= "Published" if @current_user-%></th>
   </tr>
-  
 <% for venue in @venues %>
   <tr>
-  <% for column in Venue.content_columns %>
-    <td><%=h venue.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => venue %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => venue %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => venue }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= venue.id-%></td>
+    <td><%= link_to venue.short_name, :action => 'show', :id => venue-%></td>
+    <td><%=h venue.locality -%></td>
+    <td><%= venue.created_at.strftime("%d %b, %Y")-%></td>
+    <td><%= (venue.published == true ? 'Yes' : 'No') if @current_user%></td>
+
+    <td><%= link_to('Edit', :action => 'edit', :id => venue) if @current_user -%></td>
+    <td><%= link_to('Destroy', { :action => 'destroy', :id => venue }, :confirm => 'Are you sure?', :method => :post) if @current_user %></td>
+  </tr>
+  <tr>
+    <td colspan="7">
+      <div class="box">
+<div><strong>Name</strong>: <%= venue.name -%></div>
+<div><strong>Organisation</strong>: <%= venue.organization -%></div>
+      </div>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <%= link_to 'Previous page', { :page => @venue_pages.current.previous } if @venue_pages.current.previous %>
 <%= link_to 'Next page', { :page => @venue_pages.current.next } if @venue_pages.current.next %> 
-
 <br />
-
-<%= link_to 'New venue', :action => 'new' %>
+<%= link_to 'New venue', :action => 'new' if @current_user%>
 <%end-%>
-<%content_for("left") do-%>
+<%content_for("right") do-%>
+<%= render :partial => "layouts/categories_nav" -%>
 <%end-%>

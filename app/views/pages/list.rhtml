@@ -6,31 +6,28 @@
     <th>Title</th>
     <th>Author</th>
     <th>Created on</th>
-    <th>Published</th>
-    <th>Display order</th>
+    <th><%= "Published" if @current_user-%></th>
+    <th colspan="2"></th>
   </tr>
-  <% for page in @pages %>
+<% for page in @pages %>
   <tr>
     <td><%= page.id-%>.</td>
     <td><%= link_to page.title, :action => 'show', :id => page%></td>
     <td><%= link_to page.author.fullname, :controller => 'people', :action => 'show', :id => page.author.id-%></td>
     <td><%= page.created_at.strftime("%d %b, %Y")%></td>
-    <td><%= page.published == true ? 'Yes' : 'No'%></td>
-    <td><%= page.order_by%></td>
+    <td><%= (page.published == true ? 'Yes' : 'No') if @current_user%></td>
 
-    <td><%= link_to 'Edit', :action => 'edit', :id => page %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => page }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= (link_to 'Edit', :action => 'edit', :id => page) if @current_user%></td>
+    <td><%= (link_to 'Destroy', { :action => 'destroy', :id => page }, :confirm => 'Are you sure?', :method => :post) if @current_user %></td>
   </tr>
-  <tr><td colspan="6"><div class="box"><%= truncate(page.body,100)-%></div></td></tr>
+  <tr><td colspan="7"><div class="box"><%= truncate(page.body,100)-%></div></td></tr>
   <% end %>
 </table>
 
 <%= link_to 'Previous page', { :page => @page_pages.current.previous } if @page_pages.current.previous %>
 <%= link_to 'Next page', { :page => @page_pages.current.next } if @page_pages.current.next %> 
-
 <br />
-
-<%= link_to 'New page', :action => 'new' %>
+<%= link_to 'New page', :action => 'new' if @current_user%>
 <%end-%>
 <%content_for("right") do-%>
 <%= render :partial => "layouts/categories_nav" -%>

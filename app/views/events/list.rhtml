@@ -4,14 +4,14 @@
   <tr>
     <th>Id</th>
     <th>Title</th>
-    <th>Date</th>
+    <th>Event date</th>
     <th><%= "Published" if @current_user-%></th>
   </tr>
 <% for event in @events %>
   <tr>
     <td><%= event.id -%>.</td>
     <td><%= link_to event.title, :action => 'show', :id => event-%></td>
-    <td><%= event.created_at.strftime("%d %b, %Y") -%></td>
+    <td><%= event.date.strftime("%d %b, %Y") -%></td>
     <td><%= (event.published == true ? "Yes" : "No") if @current_user -%></td>
 
     <td><%= link_to 'Edit', :action => 'edit', :id => event if @current_user%></td>
