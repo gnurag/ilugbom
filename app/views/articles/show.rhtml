@@ -15,7 +15,7 @@
   <h3>Recent articles</h3>
   <ul>
     <%for article in @recent_articles -%>
-    <li><%= link_to truncate(article.title,30), :id => article.id-%></li>
+    <li><%= link_to truncate(article.title,30), :id => article-%></li>
     <%end-%>
   </ul>
 <center><%= link_to "Show all", :action => 'list'-%></center>

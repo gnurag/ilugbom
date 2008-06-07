@@ -17,7 +17,7 @@
 <h3>Recent events</h3>
 <ul>
   <%for event in @recent_events -%>
-  <li><%= link_to truncate(event.title,30), :id => event.id-%></li>
+  <li><%= link_to truncate(event.title,30), :id => event-%></li>
   <%end-%>
 </ul>
 <center><%= link_to "Show all", :action => 'list'-%></center>

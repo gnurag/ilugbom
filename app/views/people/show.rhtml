@@ -1,14 +1,38 @@
 <%content_for("left") do-%>
-<%=RANDOM_KEY-%>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => @person.class.to_s.pluralize, :property => @person.fullname} -%>
+<div class="box">
+  <h1><%= link_to @person.fullname-%></h1>
+  <h4>Email</h4>
+  <%=h @person.email -%>
+  <h4>Profile</h4>
+  <%= @person.profile -%>
+</div>
 
-<% for column in Person.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @person.send(column.name) %>
-</p>
-<% end %>
-
-<%= link_to 'Edit', :action => 'edit', :id => @person %> |
-<%= link_to 'Back', :action => 'list' %>
+<%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @person %> | <%end-%>
+<%= link_to 'People list', :action => 'list' %>
 <%end-%>
+
 <%content_for("right") do-%>
+<%if @recent_people-%>
+<h3>Recent people</h3>
+<ul>
+  <%for person in @recent_people -%>
+  <li><%= link_to truncate(person.fullname,30), :id => person-%></li>
+  <%end-%>
+</ul>
+<center><%= link_to "Show all", :action => 'list'-%></center>
+<%end-%>
+
+<h3>Properties</h3>
+<ul>
+  <li><strong>Username</strong>: <%=h @person.username-%></li>
+  <%if @person.nickname and @person.nickname != ""%><li><strong>Nickname</strong>: <%=h @person.nickname-%></li><%end-%>
+  <%if @person.irc_nick and @person.irc_nick != ""%><li><strong>IRC Nick</strong>: <%=h @person.irc_nick-%></li><%end-%>
+  <%if @person.webpage and @person.webpage != ""%><li><a rel="nofollow" href="<%= @person.webpage-%>">Personal homepage</a></li><%end-%>
+  <%if @person.flickr_username and @person.flickr_username != ""%><li><a rel="nofollow" href="http://www.flickr.com/people/<%= @person.flickr_username-%>">Flickr profile</a></li><%end-%>
+  <%if @person.yahooim_username and @person.yahooim_username != ""%><li><strong>Y! IM id</strong>: <%=h @person.yahooim_username-%></li><%end-%>
+  <%if @person.gtalk_username and @person.gtalk_username != ""%><li><strong>Google talk id</strong>: <%=h @person.gtalk_username-%></li><%end-%>
+  <li><strong>Visible</strong>: <%= @person.visible == true ? "Yes" : "No"-%></li>
+  <li><strong>Created on</strong>: <%= @person.created_at.strftime("%d %m, %Y")-%></li>
+</ul>
 <%end-%>

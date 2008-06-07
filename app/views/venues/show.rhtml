@@ -1,12 +1,39 @@
 <%content_for("left") do-%>
-<% for column in Venue.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @venue.send(column.name) %>
-</p>
-<% end %>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => @venue.class.to_s.pluralize, :property => @venue.name} -%>
+<div class="box">
+  <h1><%= link_to @venue.name-%></h1>
+<div><strong>Short name</strong>: <%=h @venue.short_name-%></div>
+<div><strong>Organization</strong>: <%=h @venue.organization-%></div>
+<div><strong>Locality</strong>: <%=h @venue.locality-%></div>
+<h4>Address:</h4>
+<%=h @venue.address-%>
+<h4>Reaching directions:</h4>
+<%= @venue.reaching-%>
+</div>
 
-<%= link_to 'Edit', :action => 'edit', :id => @venue %> |
-<%= link_to 'Back', :action => 'list' %>
+<%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @venue %> | <%end-%>
+<%= link_to 'Venues list', :action => 'list' %>
 <%end-%>
 <%content_for("right") do-%>
+<div class="sidebar">
+<%if @recent_venues-%>
+  <h3>Recent venues</h3>
+  <ul>
+    <%for venue in @recent_venues -%>
+    <li><%= link_to truncate(venue.name,30), :id => venue-%></li>
+    <%end-%>
+  </ul>
+<center><%= link_to "Show all", :action => 'list'-%></center>
+<%end-%>
+
+<h3>Properties</h3>
+<ul>
+  <li><strong>Venue</strong>: <%= @venue.short_name-%></li>
+  <%if @venue.venue_url and @venue.venue_url != ""%><li><strong>Venue URL</strong>: <%= link_to truncate(@venue.venue_url,25), @venue.venue_url-%></li><%end-%>
+  <%if @venue.contact_person and @venue.contact_person != ""%><li><strong>Contact person</strong>: <%=h @venue.contact_person-%></li><%end-%>
+  <%if @venue.contact_phone and @venue.contact_phone != ""%><li><strong>Phone</strong>: <%=h @venue.contact_phone-%></li><%end-%>
+  <li><strong>Published</strong>: <%= @venue.published ? "Yes" : "No"-%></li>
+  <li><strong>Created on</strong>: <%= @venue.created_at.strftime("%d %m, %Y")-%></li>
+</ul>
+</div>
 <%end-%>
