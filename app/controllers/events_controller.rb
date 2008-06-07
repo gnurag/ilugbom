@@ -11,7 +11,7 @@ class EventsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @event_pages, @events = paginate :events, :conditions => published_sql(self.controller_name), :include => [:minutes], :order => "events.created_at, events.id DESC", :per_page => 10
+    @event_pages, @events = paginate :events, :conditions => published_sql(self.controller_name), :include => [:minutes], :order => "events.date DESC", :per_page => 10
     @page_title = "Events"
   end
 
