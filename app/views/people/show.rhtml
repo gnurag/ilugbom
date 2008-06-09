@@ -2,10 +2,34 @@
 <%= render :partial => "layouts/nav_bar", :locals => {:category => @person.class.to_s.pluralize, :property => @person.fullname} -%>
 <div class="box">
   <h1><%= link_to @person.fullname-%></h1>
+
+  <%if @person.email and @person.email != "" -%>
   <h4>Email</h4>
-  <%=h @person.email -%>
+  <%=h @person.email.gsub("@", " at the domain named ") -%>
+  <% end -%>
+
+  <%if @person.profile and @person.profile != ""-%>
   <h4>Profile</h4>
   <%= @person.profile -%>
+  <% end -%>
+
+  <%if @recent_articles and @recent_articles.length > 0 -%>
+  <h4>Recent articles posted by <%=@person.fullname-%></h4>
+  <ul>
+  <% for article in @recent_articles-%>
+    <li><%= link_to article.title, :controller => 'article', :action => 'show', :id => article-%></li>
+  <%end -%>
+  </ul>
+  <%end-%>
+
+  <%if @recent_minutes and @recent_minutes.length > 0 -%>
+  <h4>Recent minutes posted by <%=@person.fullname-%></h4>
+  <ul>
+  <% for minute in @recent_minutes-%>
+    <li><%= link_to "Minutes for #{minute.event.title}", :controller => 'minutes', :action => 'show', :id => minute -%></li>
+  <% end -%>
+  </ul>
+  <% end -%>
 </div>
 
 <%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @person %> | <%end-%>
@@ -33,6 +57,6 @@
   <%if @person.yahooim_username and @person.yahooim_username != ""%><li><strong>Y! IM id</strong>: <%=h @person.yahooim_username-%></li><%end-%>
   <%if @person.gtalk_username and @person.gtalk_username != ""%><li><strong>Google talk id</strong>: <%=h @person.gtalk_username-%></li><%end-%>
   <li><strong>Visible</strong>: <%= @person.visible == true ? "Yes" : "No"-%></li>
-  <li><strong>Created on</strong>: <%= @person.created_at.strftime("%d %m, %Y")-%></li>
+  <li><strong>Created on</strong>: <%= @person.created_at.strftime("%d %b, %Y")-%></li>
 </ul>
 <%end-%>

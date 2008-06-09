@@ -6,7 +6,7 @@
   <%= @event.agenda -%>
   <h4>Description</h4>
   <%= @event.description -%>
-  <%if @event.minutes.length > 0-%>
+  <%if @event.minutes and @event.minutes.length > 0-%>
   <h4>Minutes</h4>
     <ol>
     <%for m in @event.minutes-%>
@@ -38,6 +38,6 @@
   <%if @event.event_url and @event.event_url != ""%><li><a href="<%=@event.event_url-%>">Event website</a></li><%end-%>
   <%if @event.upcoming_url and @event.upcoming_url != ""%><li><a href="<%= @event.upcoming_url-%>">Y! Upcoming url</a></li><%end-%>
   <%if @event.flickr_url and @event.flickr_url != ""%><li><a href="<%= @event.flickr_url-%>">Flickr page</a></li><%end-%>
-  <li><strong>Created on</strong>: <%= @event.created_at.strftime("%d %m, %Y")-%></li>
+  <li><strong>Created on</strong>: <%= @event.created_at.strftime("%d %b, %Y")-%></li>
 </ul>
 <%end-%>

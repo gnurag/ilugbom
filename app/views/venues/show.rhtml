@@ -33,7 +33,7 @@
   <%if @venue.contact_person and @venue.contact_person != ""%><li><strong>Contact person</strong>: <%=h @venue.contact_person-%></li><%end-%>
   <%if @venue.contact_phone and @venue.contact_phone != ""%><li><strong>Phone</strong>: <%=h @venue.contact_phone-%></li><%end-%>
   <li><strong>Published</strong>: <%= @venue.published ? "Yes" : "No"-%></li>
-  <li><strong>Created on</strong>: <%= @venue.created_at.strftime("%d %m, %Y")-%></li>
+  <li><strong>Created on</strong>: <%= @venue.created_at.strftime("%d %b, %Y")-%></li>
 </ul>
 </div>
 <%end-%>
