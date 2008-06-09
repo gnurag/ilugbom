@@ -5,8 +5,8 @@
   <%= @page.body -%>
 </div>
 
-<%= link_to 'Edit', :action => 'edit', :id => @page %> |
-<%= link_to 'Back', :action => 'list' %>
+<%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @page %> | <%end-%>
+<%= link_to 'Pages list', :action => 'list' %>
 <%end-%>
 
 <%content_for("right") do-%>

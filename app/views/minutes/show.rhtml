@@ -1,12 +1,30 @@
 <%content_for("left") do-%>
-<% for column in Minute.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @minute.send(column.name) %>
-</p>
-<% end %>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => @minute.class.to_s.pluralize, :property => "Minutes for #{@minute.event.title}"} -%>
+<div class="box">
+  <h1><%= link_to "Minutes for #{@minute.event.title}", :action => 'show', :id => @minute-%></h1>
+  <%= @minute.body -%>
+</div>
 
-<%= link_to 'Edit', :action => 'edit', :id => @minute %> |
-<%= link_to 'Back', :action => 'list' %>
+<%if @current_user -%><%= link_to 'Edit', :action => 'edit', :id => @minute %> | <%end-%>
+<%= link_to 'Minutes list', :action => 'list' %>
 <%end-%>
 <%content_for("right") do-%>
+<div class="sidebar">
+<%if @recent_minutes-%>
+  <h3>Recent minutes</h3>
+  <ul>
+    <%for minute in @recent_minutes -%>
+    <li><%= link_to truncate(minute.event.title,30), :id => minute-%></li>
+    <%end-%>
+  </ul>
+<center><%= link_to "Show all", :action => 'list'-%></center>
+<%end-%>
+<h3>Properties</h3>
+<ul>
+  <li><strong>Event</strong>: <%= link_to @minute.event.title, :controller => 'events', :action => 'show', :id => @minute.event-%></li>
+  <li><strong>Posted by</strong>: <%= @minute.author.fullname-%></li>
+  <li><strong>Created on</strong>: <%= @minute.created_at.strftime("%d %b, %Y")-%></li>
+  <li><strong>Published</strong>: <%= @minute.published == true ? "Yes" : "No"-%></li>
+</ul>
+</div>
 <%end-%>

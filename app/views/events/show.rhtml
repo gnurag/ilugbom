@@ -6,6 +6,14 @@
   <%= @event.agenda -%>
   <h4>Description</h4>
   <%= @event.description -%>
+  <%if @event.minutes.length > 0-%>
+  <h4>Minutes</h4>
+    <ol>
+    <%for m in @event.minutes-%>
+      <li><%= link_to "Minutes for #{@event.title}", :controller => 'minutes', :action => 'show', :id => m-%></li>
+    <%end-%>
+    </ol>
+  <%end-%>
 </div>
 
 <%if @current_user-%><%= link_to 'Edit', :action => 'edit', :id => @event %> | <%end-%>
