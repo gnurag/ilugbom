@@ -27,6 +27,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
     @article = Article.new
   end
   
@@ -43,6 +44,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
     @article = Article.find(params[:id])
   end
 

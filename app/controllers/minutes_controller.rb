@@ -22,6 +22,8 @@ class MinutesController < ApplicationController
   end
 
   def new
+    @events = Event.find(:all, :conditions => published_sql("events"), :order => "events.date DESC")
+    @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
     @minute = Minute.new
   end
 
@@ -36,6 +38,8 @@ class MinutesController < ApplicationController
   end
 
   def edit
+    @events = Event.find(:all, :conditions => published_sql("events"), :order => "events.date DESC")
+    @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
     @minute = Minute.find(params[:id])
   end
 

@@ -22,6 +22,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @venues = Venue.find(:all, :conditions => "published = 1")
     @event = Event.new
   end
 
@@ -37,6 +38,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @venues = Venue.find(:all, :conditions => "published = 1")
     @event = Event.find(params[:id])
   end
 
