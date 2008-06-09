@@ -22,6 +22,7 @@ class PagesController < ApplicationController
   end
 
   def new
+    @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
     @page = Page.new
   end
 
@@ -38,6 +39,7 @@ class PagesController < ApplicationController
   end
 
   def edit
+    @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
     @page = Page.find(params[:id])
   end
 
