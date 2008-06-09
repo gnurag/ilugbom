@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id], :conditions => published_sql(self.controller_name))
+    @event = Event.find(params[:id], :include => [:minutes], :conditions => published_sql(self.controller_name))
     @recent_events = Event.find(:all, :conditions => published_sql(self.controller_name), :order => "events.created_at, events.id DESC", :limit => "10")
     @page_title = @event.title if @event
   end
