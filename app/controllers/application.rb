@@ -38,8 +38,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def published_sql(tablename="", fieldname = "published")
-    conditions = @current_user ? "1=1" : "#{tablename}.#{fieldname} = 1"
+  def published_sql(tablename="", fieldname = "published", extra_sql = "")
+    conditions = @current_user ? " 1=1 " : "#{tablename}.#{fieldname} = 1"
+    conditions += extra_sql
   end
   
 end
