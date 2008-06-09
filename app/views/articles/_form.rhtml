@@ -8,6 +8,9 @@
 <p><label for="article_body">Body</label><br/>
 <%= text_area 'article', 'body', :cols => 40, :rows => 10  %></p>
 
+<p><label for="article_author_id">Created by</label><br/>
+<%= collection_select('article', 'author_id', @authors, 'id', 'fullname') -%></p>
+
 <p><label for="article_created_at">Created at</label><br/>
 <%= date_select 'article', 'created_at'  %></p>
 

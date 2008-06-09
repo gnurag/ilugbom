@@ -1,13 +1,22 @@
 <%= error_messages_for 'minute' %>
 
 <!--[form:minute]-->
+<p><label for="minute_event_id">Minutes for event</label><br/>
+<%= collection_select('minute', 'event_id', @events, 'id', 'title') -%></p>
+
 <p><label for="minute_body">Body</label><br/>
 <%= text_area 'minute', 'body'  %></p>
 
 <p><label for="minute_published">Published</label><br/>
-<%= text_field 'minute', 'published'  %></p>
+<select id="minute_published" name="minute[published]">
+  <option value="false" <%= @minute.published == false ? "selected" : ""-%>>False</option>
+  <option value="true"  <%= @minute.published == true ? "selected" : ""-%>>True</option>
+</select>
+
+<p><label for="minute_author_id">Created by</label><br/>
+<%= collection_select('minute', 'author_id', @authors, 'id', 'fullname') -%></p>
 
 <p><label for="minute_created_at">Created at</label><br/>
-<%= datetime_select 'minute', 'created_at'  %></p>
+<%= date_select 'minute', 'created_at'  %></p>
 <!--[eoform:minute]-->
 
