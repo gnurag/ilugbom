@@ -14,10 +14,10 @@
 <%= text_field 'venue', 'locality'  %></p>
 
 <p><label for="venue_address">Address</label><br/>
-<%= text_field 'venue', 'address'  %></p>
+<%= text_area 'venue', 'address', :rows => 5, :cols => 40-%></p>
 
 <p><label for="venue_reaching">Reaching</label><br/>
-<%= text_area 'venue', 'reaching'  %></p>
+<%= text_area 'venue', 'reaching', :rows => 10, :cols => 40-%></p>
 
 <p><label for="venue_venue_url">Venue url</label><br/>
 <%= text_field 'venue', 'venue_url'  %></p>
@@ -29,9 +29,13 @@
 <%= text_field 'venue', 'contact_phone'  %></p>
 
 <p><label for="venue_published">Published</label><br/>
-<%= text_field 'venue', 'published'  %></p>
+<select id="venue_published" name="venue[published]">
+  <option value="false" <%= @venue.published == false ? "selected" : ""-%>>False</option>
+  <option value="true"  <%= @venue.published == true ? "selected" : ""-%>>True</option>
+</select>
+</p>
 
 <p><label for="venue_created_at">Created at</label><br/>
-<%= datetime_select 'venue', 'created_at'  %></p>
+<%= date_select 'venue', 'created_at'  %></p>
 <!--[eoform:venue]-->
 

@@ -5,18 +5,21 @@
 <p><label for="page_body">Body</label><br/>
 <%= text_area 'page', 'body', :cols => 40, :rows => 10  %></p>
 
+<p><label for="page_targer_url">Target URL</label><br/>
+<%= text_field 'page', 'target_url'  %></p>
+
 <p><label for="page_order_by">Menu order</label><br/>
 <%= text_field 'page', 'order_by', :size => 4  %></p>
 
-<p><label for="page_title">Target URL</label><br/>
-<%= text_field 'page', 'target_url'  %></p>
-
 <p><label for="page_published">Published</label><br/>
 <select id="page_published" name="page[published]">
-  <option value="false" selected>False</option>
-  <option value="true">True</option>
+  <option value="false" <%= @page.published == false ? "selected" : ""-%>>False</option>
+  <option value="true"  <%= @page.published == true ? "selected" : ""-%>>True</option>
 </select>
 </p>
+
+<p><label for="page_author_id">Created by</label><br/>
+<%= collection_select('page', 'author_id', @authors, 'id', 'fullname') -%></p>
 
 <p><label for="page_created_at">Created at</label><br/>
 <%= date_select 'page', 'created_at'  %></p>

@@ -5,13 +5,14 @@
 <%= collection_select('minute', 'event_id', @events, 'id', 'title') -%></p>
 
 <p><label for="minute_body">Body</label><br/>
-<%= text_area 'minute', 'body'  %></p>
+<%= text_area 'minute', 'body', :cols => 40, :rows => 10  %></p>
 
 <p><label for="minute_published">Published</label><br/>
 <select id="minute_published" name="minute[published]">
   <option value="false" <%= @minute.published == false ? "selected" : ""-%>>False</option>
   <option value="true"  <%= @minute.published == true ? "selected" : ""-%>>True</option>
 </select>
+</p>
 
 <p><label for="minute_author_id">Created by</label><br/>
 <%= collection_select('minute', 'author_id', @authors, 'id', 'fullname') -%></p>

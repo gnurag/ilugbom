@@ -10,6 +10,9 @@
 <p><label for="person_fullname">Fullname</label><br/>
 <%= text_field 'person', 'fullname'  %></p>
 
+<p><label for="person_profile">Profile</label><br/>
+<%= text_area 'person', 'profile', :rows => 5, :cols => 40  %></p>
+
 <p><label for="person_nickname">Nickname</label><br/>
 <%= text_field 'person', 'nickname'  %></p>
 
@@ -22,13 +25,23 @@
 <p><label for="person_webpage">Webpage</label><br/>
 <%= text_field 'person', 'webpage'  %></p>
 
-<p><label for="person_visible">Visible</label><br/>
-<%= text_field 'person', 'visible'  %></p>
+<p><label for="person_flickr_username">Flickr username</label><br/>
+<%= text_field 'person', 'flickr_username'  %></p>
 
-<p><label for="person_deleted">Deleted</label><br/>
-<%= text_field 'person', 'deleted'  %></p>
+<p><label for="person_yahooim_username">Y! IM username</label><br/>
+<%= text_field 'person', 'yahooim_username'  %></p>
+
+<p><label for="person_gtalk_username">Google talk username</label><br/>
+<%= text_field 'person', 'gtalk_username'  %></p>
+
+<p><label for="person_visible">Visible</label><br/>
+<select id="person_visible" name="person[visible]">
+  <option value="false" <%= @person.visible == false ? "selected" : ""-%>>False</option>
+  <option value="true"  <%= @person.visible == true ? "selected" : ""-%>>True</option>
+</select>
+</p>
 
 <p><label for="person_created_at">Created at</label><br/>
-<%= datetime_select 'person', 'created_at'  %></p>
+<%= date_select 'person', 'created_at'  %></p>
 <!--[eoform:person]-->
 
