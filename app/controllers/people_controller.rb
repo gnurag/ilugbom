@@ -39,13 +39,15 @@ class PeopleController < ApplicationController
   end
 
   def list
-    @person_pages, @people = paginate :people, :conditions => published_sql(self.controller_name, "visible"), :order => "people.fullname, people.created_at, people.id DESC", :per_page => 10
+    @person_pages, @people = paginate :people, :conditions => published_sql(self.controller_name, "visible", " AND people.deleted = 0"), :order => "people.fullname, people.created_at, people.id DESC", :per_page => 10
     @page_title = "People"
   end
 
   def show
-    @person = Person.find(params[:id], :conditions => published_sql(self.controller_name, "visible"))
-    @recent_people = Person.find(:all, :conditions => published_sql(self.controller_name, "visible"), :order => "people.fullname, people.created_at, people.id DESC", :limit => "10")
+    @person = Person.find(params[:id], :conditions => published_sql(self.controller_name, "visible", " AND people.deleted=0 "))
+    @recent_articles = Article.find(:all, :conditions => published_sql("articles", "published"), :order => "articles.created_at DESC", :limit => 10)
+    @recent_minutes  = Minute.find(:all, :conditions => published_sql("minutes", "published"), :include => [:event], :order => "minutes.created_at DESC", :limit => 10)
+    @recent_people = Person.find(:all, :conditions => published_sql(self.controller_name, "visible", " AND people.deleted = 0"), :order => "people.created_at, people.fullname, people.id DESC", :limit => "10")
     @page_title = @person.fullname if @person
   end
 
@@ -55,6 +57,7 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(params[:person])
+    @person.hash_user_password(params[:person][:password])
     if @person.save
       flash[:notice] = 'Person was successfully created.'
       redirect_to :action => 'list'
@@ -65,10 +68,12 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
+    @person.password = ""
   end
 
   def update
     @person = Person.find(params[:id])
+    @person.hash_user_password(params[:person][:password])
     if @person.update_attributes(params[:person])
       flash[:notice] = 'Person was successfully updated.'
       redirect_to :action => 'show', :id => @person
@@ -78,7 +83,7 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    Person.find(params[:id]).destroy
+    Person.find(params[:id]).deleted = 1
     redirect_to :action => 'list'
   end
 
