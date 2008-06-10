@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
 
   def home
     @articles = Article.find(:all, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at, articles.id DESC", :limit => "3")
+    @upcoming_events = Event.find(:all, :conditions => "#{published_sql("events", "published")} AND events.date >= CURRENT_DATE() ")
     render :template => 'layouts/home'
   end
 
