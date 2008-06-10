@@ -40,6 +40,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = 'Article was successfully created.'
       redirect_to :action => 'list'
     else
+      @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
       render :action => 'new'
     end
   end
@@ -57,6 +58,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = 'Article was successfully updated.'
       redirect_to :action => 'show', :id => @article
     else
+      @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
       render :action => 'edit'
     end
   end
