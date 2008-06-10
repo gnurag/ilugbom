@@ -1,6 +1,7 @@
 <div class="box">
-  <h1>Upcoming event: <%=Event.find(1).title-%></h1>
-  <p><%=Event.find(1).agenda-%></p>
-  
-  <a href="#">More info</a> | <a href="#">Y! Upcoming</a> | <a href="#">Venue</a> 
+<% for event in @upcoming_events -%>
+  <h3>Upcoming event: <%= link_to event.title, :controller => 'events', :action => 'show', :id => event-%></h3>
+  <p><%=event.agenda-%></p>
+  <%= link_to "More info", :controller => 'events', :action => 'show', :id => event -%> | <a href="#">Y! Upcoming</a> | <a href="#">Venue</a> 
+<% end -%>
 </div>
