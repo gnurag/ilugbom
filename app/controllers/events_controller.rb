@@ -33,12 +33,13 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event was successfully created.'
       redirect_to :action => 'list'
     else
+      @venues = Venue.find(:all, :conditions => published_sql("venues"), :order => "short_name ASC")
       render :action => 'new'
     end
   end
 
   def edit
-    @venues = Venue.find(:all, :conditions => "published = 1")
+    @venues = Venue.find(:all, :conditions => published_sql("venues"), :order => "short_name ASC")
     @event = Event.find(params[:id])
   end
 
@@ -50,6 +51,7 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event was successfully updated.'
       redirect_to :action => 'show', :id => @event
     else
+      @venues = Venue.find(:all, :conditions => published_sql("venues"), :order => "short_name ASC")
       render :action => 'edit'
     end
   end
