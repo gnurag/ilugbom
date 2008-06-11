@@ -9,8 +9,14 @@ class Person < ActiveRecord::Base
   validates_length_of :nickname, :maximum => 50
   
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-
   validates_uniqueness_of :username, :nickname
+  validates_uniqueness_of :email
+  
+  validates_presence_of :password, :password_confirmation, :on => :create
+  validates_confirmation_of :password
+
+  ## Id is a protected attribute. This makes sure no web request can change these values.
+  attr_protected :id
 
   def self.authenticate(username, password)
     password = OpenSSL::Digest::SHA1.new(password).hexdigest
