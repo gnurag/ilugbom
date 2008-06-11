@@ -24,8 +24,8 @@ class Person < ActiveRecord::Base
     return (user and user.password == password) ? user : false
   end
 
-  def hash_user_password(password)
-    self.password = OpenSSL::Digest::SHA1.new(password).hexdigest
+  def self.hash_user_password(password)
+    return OpenSSL::Digest::SHA1.new(password).hexdigest
   end
 
   ## Get pipe separated value for a Person object
