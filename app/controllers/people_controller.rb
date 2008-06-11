@@ -62,6 +62,7 @@ class PeopleController < ApplicationController
       flash[:notice] = 'Person was successfully created.'
       redirect_to :action => 'list'
     else
+      @person.password = params[:person][:password]
       render :action => 'new'
     end
   end
@@ -78,6 +79,7 @@ class PeopleController < ApplicationController
       flash[:notice] = 'Person was successfully updated.'
       redirect_to :action => 'show', :id => @person
     else
+      @person.password = params[:person][:password]
       render :action => 'edit'
     end
   end
