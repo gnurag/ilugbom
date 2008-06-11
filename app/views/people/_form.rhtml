@@ -10,6 +10,11 @@
 <p><label for="person_fullname">Fullname</label><br/>
 <%= text_field 'person', 'fullname'  %></p>
 
+<p><label for="person_email">Email</label><br/>
+<%= text_field 'person', 'email'  %></p>
+
+<div class="footnote">Additional details</div>
+
 <p><label for="person_profile">Profile</label><br/>
 <%= text_area 'person', 'profile', :rows => 5, :cols => 40  %></p>
 
@@ -18,9 +23,6 @@
 
 <p><label for="person_irc_nick">Irc nick</label><br/>
 <%= text_field 'person', 'irc_nick'  %></p>
-
-<p><label for="person_email">Email</label><br/>
-<%= text_field 'person', 'email'  %></p>
 
 <p><label for="person_webpage">Webpage</label><br/>
 <%= text_field 'person', 'webpage'  %></p>
@@ -33,6 +35,8 @@
 
 <p><label for="person_gtalk_username">Google talk username</label><br/>
 <%= text_field 'person', 'gtalk_username'  %></p>
+
+<div class="footnote">Privacy</div>
 
 <p><label for="person_visible">Visible</label><br/>
 <select id="person_visible" name="person[visible]">
