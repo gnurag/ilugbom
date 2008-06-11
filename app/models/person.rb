@@ -3,6 +3,14 @@ class Person < ActiveRecord::Base
   has_many :minutes, :foreign_key => "author_id"
   has_many :pages, :foreign_key => "author_id"
 
+  validates_size_of :username, :within => 1..50
+  validates_size_of :fullname, :within => 1..100
+  validates_length_of :irc_nick, :maximum => 30
+  validates_length_of :nickname, :maximum => 50
+  
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
+  validates_uniqueness_of :username, :nickname
 
   def self.authenticate(username, password)
     password = OpenSSL::Digest::SHA1.new(password).hexdigest
