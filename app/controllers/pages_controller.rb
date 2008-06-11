@@ -34,6 +34,7 @@ class PagesController < ApplicationController
       flash[:notice] = 'Page was successfully created.'
       redirect_to :action => 'list'
     else
+      @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
       render :action => 'new'
     end
   end
@@ -51,6 +52,7 @@ class PagesController < ApplicationController
       flash[:notice] = 'Page was successfully updated.'
       redirect_to :action => 'show', :id => @page
     else
+      @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
       render :action => 'edit'
     end
   end

@@ -33,6 +33,8 @@ class MinutesController < ApplicationController
       flash[:notice] = 'Minute was successfully created.'
       redirect_to :action => 'list'
     else
+      @events = Event.find(:all, :conditions => published_sql("events"), :order => "events.date DESC")
+      @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
       render :action => 'new'
     end
   end
@@ -49,6 +51,8 @@ class MinutesController < ApplicationController
       flash[:notice] = 'Minute was successfully updated.'
       redirect_to :action => 'show', :id => @minute
     else
+      @events = Event.find(:all, :conditions => published_sql("events"), :order => "events.date DESC")
+      @authors = Person.find(:all, :conditions => 'deleted = 0', :order => "fullname ASC")
       render :action => 'edit'
     end
   end
