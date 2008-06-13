@@ -5,9 +5,9 @@
 <div><strong>Short name</strong>: <%=h @venue.short_name-%></div>
 <div><strong>Organization</strong>: <%=h @venue.organization-%></div>
 <div><strong>Locality</strong>: <%=h @venue.locality-%></div>
-<h4>Address:</h4>
+<%if @venue.address != ""-%><h4>Address:</h4><%end-%>
 <%=h @venue.address-%>
-<h4>Reaching directions:</h4>
+<%if @venue.reaching != ""-%><h4>Reaching directions:</h4><%end-%>
 <%= @venue.reaching-%>
 </div>
 
