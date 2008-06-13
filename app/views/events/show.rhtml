@@ -2,9 +2,9 @@
 <%= render :partial => "layouts/nav_bar", :locals => {:category => @event.class.to_s.pluralize, :property => @event.title} -%>
 <div class="box">
   <h1><%= link_to @event.title-%></h1>
-  <h4>Agenda</h4>
+  <%if @event.agenda != ""-%><h4>Agenda</h4><%end-%>
   <%= @event.agenda -%>
-  <h4>Description</h4>
+  <%if @event.description != ""-%><h4>Description</h4><%end-%>
   <%= @event.description -%>
   <%if @event.minutes and @event.minutes.length > 0-%>
   <h4>Minutes</h4>
@@ -34,6 +34,7 @@
 <h3>Properties</h3>
 <ul>
   <li><strong>Title</strong>: <%= @event.title-%></li>
+  <%if @event.venue-%><li><strong>Venue</strong>: <%= link_to @event.venue.short_name, :controller => 'venues', :action => 'show', :id => @event.venue-%></li><%end-%>
   <%if @event.date and @event.date != ""%><li><strong>Event date</strong>: <%= @event.date.strftime("%d %b, %Y")-%></li><%end-%>
   <%if @event.event_url and @event.event_url != ""%><li><a href="<%=@event.event_url-%>">Event website</a></li><%end-%>
   <%if @event.upcoming_url and @event.upcoming_url != ""%><li><a href="<%= @event.upcoming_url-%>">Y! Upcoming url</a></li><%end-%>
