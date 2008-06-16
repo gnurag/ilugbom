@@ -1,0 +1,6 @@
+--- 
+port: 4200
+log_file: log/mongrel.log
+pid_file: tmp/pids/mongrel.pid
+servers: 4
+environment: production
