@@ -1,1 +1,1 @@
-<h4><%= link_to "Home", :controller => 'articles', :action => 'home'-%><%=" | " if category-%><%= property ? link_to(category, :controller => category.downcase) : category.titlecase-%><%=" | " if category and property-%><%= property if category and property-%></h4>
+<h4><%= link_to "Home", :controller => 'articles', :action => 'home'-%><%=" | " if category-%><%= property ? link_to(category, :controller => category.downcase, :action => "list") : category.titlecase-%><%=" | " if category and property-%><%= property if category and property-%></h4>
