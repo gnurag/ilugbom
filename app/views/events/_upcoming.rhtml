@@ -4,7 +4,7 @@
   <p><%=event.agenda-%></p>
   <div class="footnote">
   <%=event.date.strftime("%d %b, %Y")-%><%=" | " if event.venue-%>
-  <%= link_to "Venue", :controller => "events", :action => "show", :id => event.venue-%><%=" | " if event.upcoming_url and event.upcoming_url != ""-%>
+  <%= link_to "Venue", :controller => "venues", :action => "show", :id => event.venue-%><%=" | " if event.upcoming_url and event.upcoming_url != ""-%>
   <%= link_to "Y! Upcoming", event.upcoming_url if (event.upcoming_url and event.upcoming_url != "")-%></div>
 <% end -%>
 </div>
