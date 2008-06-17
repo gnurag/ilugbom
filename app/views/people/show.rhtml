@@ -17,7 +17,7 @@
   <h4>Recent articles posted by <%=@person.fullname-%></h4>
   <ul>
   <% for article in @recent_articles-%>
-    <li><%= link_to article.title, :controller => 'article', :action => 'show', :id => article-%></li>
+    <li><%= link_to article.title, :controller => 'articles', :action => 'show', :id => article-%></li>
   <%end -%>
   </ul>
   <%end-%>
