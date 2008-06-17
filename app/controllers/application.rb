@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def init_site
-    @nav_pages = Page.find(:all, :conditions => "pages.published = 1", :order => "pages.order_by,pages.id ASC")
+    @nav_pages = Page.find(:all, :conditions => "pages.published = 1 AND pages.order_by >= 0", :order => "pages.order_by, pages.id ASC")
   end
 
   ## Stiky cookies
