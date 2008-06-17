@@ -43,6 +43,7 @@ module AuthSystem
     cookies[COOKIE_NAME] = user_data_encrypted + ":" + user_data_checksum
   end
   
+  # Function to retrieve user's PSV, after decrypting the user cookie.
   def get_user_from_login_cookie
     user_cookie = cookies[COOKIE_NAME]
     if not user_cookie.nil?
