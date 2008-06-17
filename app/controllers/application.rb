@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   # Setting a balancer cookie, so that Apache's mod_balancer module can reroute the requests to the correct 
   # mongrel server. 
   def balancer_cookie
-    cookies[:BALANCEID] = 'balancer.mongrel' + (Time.now.src % MONGREL_COUNT).to_s if !cookies[:BALANCEID]
+    cookies[:BALANCEID] = 'balancer.mongrel' + (Time.now.sec % MONGREL_COUNT).to_s if !cookies[:BALANCEID]
     return true
   end
 
