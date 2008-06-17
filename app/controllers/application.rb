@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include AuthSystem
   require 'openssl'
   session :disabled => true
-  prepend_before_filter :get_user_from_cookie, :init_site
+  prepend_before_filter :get_user_from_cookie, :init_site, :balancer_cookie
 
   def login_required
     redirect_to :controller => 'people', :action => 'login', :return => request.host_with_port+request.request_uri if not @current_user
@@ -35,6 +35,14 @@ class ApplicationController < ActionController::Base
 
   def init_site
     @nav_pages = Page.find(:all, :conditions => "pages.published = 1", :order => "pages.order_by,pages.id ASC")
+  end
+
+  ## Stiky cookies
+  # Setting a balancer cookie, so that Apache's mod_balancer module can reroute the requests to the correct 
+  # mongrel server. 
+  def balancer_cookie
+    cookies[:BALANCEID] = 'balancer.mongrel' + (Time.now.src % MONGREL_COUNT).to_s if !cookies[:BALANCEID]
+    return true
   end
 
   private
