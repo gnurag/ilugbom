@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
 
   def init_site
-    @pages = Page.find(:all, :conditions => "pages.published = 1", :order => "pages.order_by,pages.id ASC")
+    @nav_pages = Page.find(:all, :conditions => "pages.published = 1", :order => "pages.order_by,pages.id ASC")
   end
 
   private
