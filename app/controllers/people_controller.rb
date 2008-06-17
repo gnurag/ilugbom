@@ -45,8 +45,8 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id], :conditions => published_sql(self.controller_name, "visible", " AND people.deleted=0 "))
-    @recent_articles = Article.find(:all, :conditions => published_sql("articles", "published"), :order => "articles.created_at DESC", :limit => 10)
-    @recent_minutes  = Minute.find(:all, :conditions => published_sql("minutes", "published"), :include => [:event], :order => "minutes.created_at DESC", :limit => 10)
+    @recent_articles = Article.find(:all, :conditions => "#{published_sql("articles", "published")} AND articles.author_id = #{@person.id}", :order => "articles.created_at DESC", :limit => 10)
+    @recent_minutes  = Minute.find(:all, :conditions => "#{published_sql("minutes", "published")} AND minutes.author_id = #{@person.id}", :include => [:event], :order => "minutes.created_at DESC", :limit => 10)
     @recent_people = Person.find(:all, :conditions => published_sql(self.controller_name, "visible", " AND people.deleted = 0"), :order => "people.created_at, people.fullname, people.id DESC", :limit => "10")
     @page_title = @person.fullname if @person
   end
