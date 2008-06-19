@@ -1,6 +1,7 @@
 <div class="sidebar">
 <h3>Albums</h3>
 <div id="main-image">
-  <img src="images/gallery.jpg" alt="Picture gallery" width="215" height="161" />
+  <%random_no = ((Time.now.sec % 15) + 1).to_s-%>
+  <img src="album/<%=random_no-%>.jpg" alt="Picture gallery" width="215" height="161" />
 </div>
 </div>
