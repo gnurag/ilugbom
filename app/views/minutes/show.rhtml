@@ -1,7 +1,7 @@
 <%content_for("left") do-%>
-<%= render :partial => "layouts/nav_bar", :locals => {:category => @minute.class.to_s.pluralize, :property => "Minutes for #{@minute.event.title}"} -%>
+<%= render :partial => "layouts/nav_bar", :locals => {:category => @minute.class.to_s.pluralize, :property => "Minutes for #{@minute.event ? @minute.event.title : "[Deleted event]"}"} -%>
 <div class="box">
-  <h1><%= link_to "Minutes for #{@minute.event.title}", :action => 'show', :id => @minute-%></h1>
+  <h1><%= link_to "Minutes for #{@minute.event ? @minute.event.title : "[Deleted event]"}", :action => 'show', :id => @minute-%></h1>
   <%= @minute.body -%>
 </div>
 
@@ -14,14 +14,14 @@
   <h3>Recent minutes</h3>
   <ul>
     <%for minute in @recent_minutes -%>
-    <li><%= link_to truncate(minute.event.title,30), :id => minute-%></li>
+    <li><%= link_to truncate((minute.event ? minute.event.title : "[Deleted event]"),30), :id => minute-%></li>
     <%end-%>
   </ul>
 <center><%= link_to "Show all", :action => 'list'-%></center>
 <%end-%>
 <h3>Properties</h3>
 <ul>
-  <li><strong>Event</strong>: <%= link_to @minute.event.title, :controller => 'events', :action => 'show', :id => @minute.event-%></li>
+  <%if @minute.event-%><li><strong>Event</strong>: <%= link_to @minute.event.title, :controller => 'events', :action => 'show', :id => @minute.event-%></li><%end-%>
   <li><strong>Posted by</strong>: <%= @minute.author.fullname-%></li>
   <li><strong>Created on</strong>: <%= @minute.created_at.strftime("%d %b, %Y")-%></li>
   <li><strong>Published</strong>: <%= @minute.published == true ? "Yes" : "No"-%></li>
