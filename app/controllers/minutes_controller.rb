@@ -43,7 +43,7 @@ class MinutesController < ApplicationController
   def show
     @minute = Minute.find(params[:id], :conditions => published_sql(self.controller_name))
     @recent_minutes = Minute.find(:all, :conditions => published_sql(self.controller_name), :order => "minutes.created_at DESC", :limit => "10")
-    @page_title = "Minutes for #{@minute.event.title}" if @minute
+    @page_title = "Minutes for #{@minute.event ? @minute.event.title : "[Deleted event]"}" if @minute
   end
 
   def new
