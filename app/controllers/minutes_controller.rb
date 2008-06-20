@@ -36,13 +36,13 @@ class MinutesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @minute_pages, @minutes = paginate :minutes, :conditions => published_sql(self.controller_name), :include => [:event], :order => "minutes.created_at, minutes.id DESC",  :per_page => 10
+    @minute_pages, @minutes = paginate :minutes, :conditions => published_sql(self.controller_name), :include => [:event], :order => "minutes.created_at DESC",  :per_page => 10
     @page_title = "Minutes"
   end
 
   def show
     @minute = Minute.find(params[:id], :conditions => published_sql(self.controller_name))
-    @recent_minutes = Minute.find(:all, :conditions => published_sql(self.controller_name), :order => "minutes.created_at, minutes.id DESC", :limit => "10")
+    @recent_minutes = Minute.find(:all, :conditions => published_sql(self.controller_name), :order => "minutes.created_at DESC", :limit => "10")
     @page_title = "Minutes for #{@minute.event.title}" if @minute
   end
 

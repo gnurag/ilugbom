@@ -36,13 +36,13 @@ class VenuesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @venue_pages, @venues = paginate :venues, :conditions => published_sql(self.controller_name), :order => "venues.created_at, venues.id DESC",:per_page => 10
+    @venue_pages, @venues = paginate :venues, :conditions => published_sql(self.controller_name), :order => "venues.created_at DESC",:per_page => 10
     @page_title = "Venues"
   end
 
   def show
     @venue = Venue.find(params[:id], :conditions => published_sql(self.controller_name))
-    @recent_venues = Venue.find(:all, :conditions => published_sql(self.controller_name), :order => "venues.created_at, venues.id DESC", :limit => "10")
+    @recent_venues = Venue.find(:all, :conditions => published_sql(self.controller_name), :order => "venues.created_at DESC", :limit => "10")
     @page_title = @venue.name if @venue
   end
 

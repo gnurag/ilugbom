@@ -36,19 +36,19 @@ class ArticlesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def home
-    @articles = Article.find(:all, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at, articles.id DESC", :limit => "3")
+    @articles = Article.find(:all, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at DESC", :limit => "3")
     @upcoming_events = Event.find(:all, :conditions => "#{published_sql("events", "published")} AND events.date >= CURRENT_DATE() ")
     render :template => 'layouts/home'
   end
 
   def list
-    @article_pages, @articles = paginate :articles, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at, articles.id DESC", :per_page => 10
+    @article_pages, @articles = paginate :articles, :conditions => published_sql(self.controller_name), :include => [:author], :order => "articles.created_at DESC", :per_page => 10
     @page_title = "Articles"
   end
 
   def show
     @article   = Article.find(params[:id], :conditions => published_sql(self.controller_name))
-    @recent_articles = Article.find(:all, :conditions => published_sql(self.controller_name), :order => "articles.created_at, articles.id DESC", :limit => "10")
+    @recent_articles = Article.find(:all, :conditions => published_sql(self.controller_name), :order => "articles.created_at DESC", :limit => "10")
     @page_title = @article.title if @article
   end
 
