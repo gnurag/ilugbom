@@ -12,7 +12,7 @@
 <% for minute in @minutes %>
   <tr>
     <td><%= minute.id -%></td>
-    <td><%= link_to "Minutes for " + minute.event.title, :controller => 'minutes', :action => 'show', :id => minute-%></td>
+    <td><%= link_to "Minutes for " + (minute.event ? minute.event.title : " [Deleted event]"), :controller => 'minutes', :action => 'show', :id => minute-%></td>
     <td><%= link_to minute.author.fullname, :controller => 'people', :action => 'show', :id => minute.author -%></td>
     <td><%= minute.created_at.strftime("%d %b, %Y")-%></td>
     <td><%= (minute.published == true ? 'Yes' : 'No') if @current_user-%></td>
