@@ -4,7 +4,7 @@ This package itself is known as Ilug-Bom. Use it to quickly create
 website for managing events for your own local community.
 
 Latest sources from trunk are available at: 
-http://svn.xinh.org/svn/ilugbom/trunk/
+git://github.com/gnurag/ilugbom.git
 
 In case something is broken, or is outright wrong, drop me a mail with
 comments/suggestions at: anurag@xinh.org
